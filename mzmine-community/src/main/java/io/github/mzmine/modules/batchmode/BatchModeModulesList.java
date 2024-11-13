@@ -111,6 +111,7 @@ import io.github.mzmine.modules.dataprocessing.id_localcsvsearch.LocalCSVDatabas
 import io.github.mzmine.modules.dataprocessing.id_ms2search.Ms2SearchModule;
 import io.github.mzmine.modules.dataprocessing.id_nist.NistMsSearchModule;
 import io.github.mzmine.modules.dataprocessing.id_online_reactivity.OnlineLcReactivityModule;
+import io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionModule;
 import io.github.mzmine.modules.dataprocessing.id_precursordbsearch.PrecursorDBSearchModule;
 import io.github.mzmine.modules.dataprocessing.id_spectral_library_match.SpectralLibrarySearchModule;
 import io.github.mzmine.modules.dataprocessing.id_spectral_library_match.library_to_featurelist.SpectralLibraryToFeatureListModule;
@@ -338,18 +339,19 @@ public class BatchModeModulesList {
           MainSpectralNetworkingModule.class, //
           AnnotateIsomersModule.class, //
 
-          /*
-           * {@link io.github.mzmine.modules.MZmineModuleCategory#ION_IDENTITY_NETWORKS}
-           */
-          IonNetworkingModule.class, //
-          AddIonNetworkingModule.class, //
-          IonNetworkRefinementModule.class, //
-          IonNetworkMSMSCheckModule.class, //
-          FormulaPredictionIonNetworkModule.class, //
-          CreateAvgNetworkFormulasModule.class, //
-          IonNetRelationsModule.class, //
-          OnlineLcReactivityModule.class, //
-          ClearIonIdentitiesModule.class, //
+      /*
+       * {@link io.github.mzmine.modules.MZmineModuleCategory#ION_IDENTITY_NETWORKS}
+       */
+      IonNetworkingModule.class, //
+      AddIonNetworkingModule.class, //
+      IonNetworkRefinementModule.class, //
+      IonNetworkMSMSCheckModule.class, //
+      FormulaPredictionIonNetworkModule.class, //
+      CreateAvgNetworkFormulasModule.class, //
+      IonNetRelationsModule.class, //
+      OnlineLcReactivityModule.class, //
+      PostColumnReactionModule.class, //
+      ClearIonIdentitiesModule.class, //
 
       /*
         {@link io.github.mzmine.modules.MZmineModuleCategory.MainCategory#FEATURE_ANNOTATION}
