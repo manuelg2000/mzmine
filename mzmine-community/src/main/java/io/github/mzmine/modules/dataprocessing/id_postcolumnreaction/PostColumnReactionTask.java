@@ -19,7 +19,9 @@ import io.github.mzmine.taskcontrol.TaskStatus;
 import io.github.mzmine.util.FeatureListRowSorter;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +32,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
 
   private final FeatureList flist;
   private final String description;
+  private Map<String, Integer> annotationCounts = new HashMap<>();
 
   private final int totalRows;
 
@@ -137,9 +140,24 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     if (correlatedRow.getPreferredAnnotation() == null || correlatedRow.getCompoundAnnotations().isEmpty()) {
       String baseAnnotation = baseRow.getPreferredAnnotationName();
       if (baseAnnotation != null) {
-        String tpAnnotation = baseAnnotation + "_ETP_" + correlatedRow.getID(); // Using ID for uniqueness
-        SimpleCompoundDBAnnotation annotation = new SimpleCompoundDBAnnotation();
+        String roundedMz = String.valueOf(Math.round(correlatedRow.getAverageMZ()));
+        String baseTpAnnotation = baseAnnotation + "_ETP_" + roundedMz;
 
+        // Get the current count for this base annotation
+        int count = annotationCounts.getOrDefault(baseTpAnnotation, 0);
+        String tpAnnotation;
+
+        if (count > 0) {
+          char suffix = (char) ('a' + count);
+          tpAnnotation = baseTpAnnotation + suffix;
+        } else {
+          tpAnnotation = baseTpAnnotation;
+        }
+
+        // Increment the count for this base annotation
+        annotationCounts.put(baseTpAnnotation, count + 1);
+
+        SimpleCompoundDBAnnotation annotation = new SimpleCompoundDBAnnotation();
         annotation.put(PrecursorMZType.class, correlatedRow.getAverageMZ());
         annotation.put(CompoundNameType.class, tpAnnotation);
         correlatedRow.addCompoundAnnotation(annotation);
