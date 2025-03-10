@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The mzmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -36,6 +36,7 @@ import io.github.mzmine.gui.MZmineGUI;
 import io.github.mzmine.gui.colorpicker.ColorPickerMenuItem;
 import io.github.mzmine.gui.mainwindow.introductiontab.MZmineIntroductionTab;
 import io.github.mzmine.gui.mainwindow.tasksview.TasksViewController;
+import io.github.mzmine.gui.mainwindow.workspace.AcademicWorkspace;
 import io.github.mzmine.javafx.concurrent.threading.FxThread;
 import io.github.mzmine.javafx.dialogs.DialogLoggerUtil;
 import io.github.mzmine.javafx.util.FxIconUtil;
@@ -79,10 +80,14 @@ import io.github.mzmine.util.javafx.groupablelistview.GroupableListViewCell;
 import io.github.mzmine.util.javafx.groupablelistview.GroupableListViewEntity;
 import io.github.mzmine.util.javafx.groupablelistview.ValueEntity;
 import io.github.mzmine.util.spectraldb.entry.SpectralLibrary;
+import io.mzio.mzmine.gui.workspace.Workspace;
+import io.mzio.mzmine.gui.workspace.WorkspaceMenuHelper;
+import io.mzio.mzmine.gui.workspace.WorkspaceTags;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -153,6 +158,7 @@ public class MainWindowController {
       "icons/peaklisticon_aligned.png");
   private static final NumberFormat percentFormat = NumberFormat.getPercentInstance();
   private final Logger logger = Logger.getLogger(this.getClass().getName());
+
   @FXML
   public ContextMenu rawDataContextMenu;
   @FXML
@@ -231,6 +237,7 @@ public class MainWindowController {
   private Region miniTaskView;
   private final PauseTransition manualGcDelay = new PauseTransition(Duration.millis(500));
 
+  private Workspace activeWorkspace;
 
   @NotNull
   private static Pane getRawGraphic(RawDataFile rawDataFile) {
@@ -330,6 +337,25 @@ public class MainWindowController {
       memoryBarLabel.setText("%.1f/%.1f GB used".formatted(usedMemGB, totalMemGB));
     }));
     memoryUpdater.play();
+
+    final AcademicWorkspace academicWorkspace = new AcademicWorkspace();
+    WorkspaceMenuHelper.addWorkspace(academicWorkspace);
+    if (WorkspaceMenuHelper.getDefaultWorkspaceId() == null) {
+      WorkspaceMenuHelper.setDefaultWorkspace(academicWorkspace);
+    }
+    setActiveWorkspace(WorkspaceMenuHelper.getDefaultWorkspaceOrElse(academicWorkspace),
+        EnumSet.allOf(WorkspaceTags.class));
+  }
+
+  public void setActiveWorkspace(@NotNull Workspace workspace, EnumSet<WorkspaceTags> tags) {
+    logger.fine("Setting active workspace to " + workspace.getName());
+    activeWorkspace = workspace;
+    // rebuild the menu here, needed for updates after user changes
+    mainPane.setTop(workspace.buildMainMenu(tags));
+  }
+
+  public Workspace getActiveWorkspace() {
+    return activeWorkspace;
   }
 
   private void initFeatureListsList() {
@@ -915,6 +941,8 @@ public class MainWindowController {
       new Thread(() -> {
         logger.info("Freeing unused memory");
         System.gc();
+        logger.fine("Used heap memory after manual GC: %.2f GB".formatted(
+            ConfigService.getConfiguration().getUsedMemoryGB()));
         // temporary logs
 //        var raws = ProjectService.getProject().getCurrentRawDataFiles();
 //        var total = raws.stream().map(RawDataFile::getScans).flatMap(Collection::stream)

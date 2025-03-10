@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The mzmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -27,6 +27,7 @@ package io.github.mzmine.modules.batchmode;
 
 import io.github.mzmine.modules.MZmineProcessingModule;
 import io.github.mzmine.modules.MZmineRunnableModule;
+import io.github.mzmine.modules.batchmode.autosave.AutoSaveBatchModule;
 import io.github.mzmine.modules.dataanalysis.feat_ms2_similarity_intra.IntraFeatureRowMs2SimilarityModule;
 import io.github.mzmine.modules.dataanalysis.pca_new.PCAModule;
 import io.github.mzmine.modules.dataanalysis.spec_chimeric_precursor.PrecursorPurityCheckerModule;
@@ -139,6 +140,7 @@ import io.github.mzmine.modules.io.export_network_graphml.NetworkGraphMlExportMo
 import io.github.mzmine.modules.io.export_rawdata_mzml.MzMLExportModule;
 import io.github.mzmine.modules.io.export_rawdata_netcdf.NetCDFExportModule;
 import io.github.mzmine.modules.io.export_scans.ExportScansFromRawFilesModule;
+import io.github.mzmine.modules.io.export_scans_modular.ExportScansFeatureModule;
 import io.github.mzmine.modules.io.import_feature_networks.ImportFeatureNetworksSimpleModule;
 import io.github.mzmine.modules.io.import_features_mztabm.MZTabmImportModule;
 import io.github.mzmine.modules.io.import_rawdata_all.AllSpectralDataImportModule;
@@ -195,6 +197,8 @@ public class BatchModeModulesList {
   // must be modifiable so we can add more modules for mzminepro
   public static final List<Class<? extends MZmineProcessingModule>> MODULES = new ArrayList<>(
       List.of(
+          // debugging
+//          DebugCompareFeatureListsModule.class, //
           /*
            * {@link io.github.mzmine.modules.MZmineModuleCategory.MainCategory#PROJECT}
            */
@@ -202,6 +206,7 @@ public class BatchModeModulesList {
           ProjectSaveModule.class, //
           ProjectSaveAsModule.class, //
           ClearProjectModule.class, //
+          AutoSaveBatchModule.class, //
 
           /*
            * {@link io.github.mzmine.modules.MZmineModuleCategory.MainCategory#SPECTRAL_DATA}
@@ -399,6 +404,7 @@ public class BatchModeModulesList {
           LibraryAnalysisCSVExportModule.class, //
           LibraryBatchGenerationModule.class, //
           GNPSLibraryBatchExportModule.class, //
+          ExportScansFeatureModule.class, //
           FeatureMLExportModularModule.class, //
           MsMsQualityExportModule.class, //
           ExportAllIdsGraphicalModule.class, //
@@ -416,7 +422,6 @@ public class BatchModeModulesList {
           TimsTOFMaldiAcquisitionModule.class, //
           SimsefImagingSchedulerModule.class //
       ));
-
 
   // must be modifiable so we can add more modules for mzminepro
   /**
