@@ -1,15 +1,20 @@
 package io.github.mzmine.modules.dataprocessing.id_postcolumnreaction;
 
+import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.elements;
+
 import io.github.mzmine.datamodel.MZmineProject;
 import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.datamodel.features.FeatureList;
 import io.github.mzmine.datamodel.features.FeatureListRow;
+import io.github.mzmine.datamodel.features.compoundannotations.CompoundDBAnnotation;
 import io.github.mzmine.datamodel.features.compoundannotations.SimpleCompoundDBAnnotation;
 import io.github.mzmine.datamodel.features.correlation.R2RMap;
 import io.github.mzmine.datamodel.features.correlation.RowsRelationship;
 import io.github.mzmine.datamodel.features.types.annotations.CompoundNameType;
 import io.github.mzmine.datamodel.features.types.numbers.PrecursorMZType;
 import io.github.mzmine.main.MZmineCore;
+import io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters;
+import io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListTask;
 import io.github.mzmine.modules.dataprocessing.id_online_reactivity.OnlineLcReactivityModule;
 import io.github.mzmine.modules.dataprocessing.id_online_reactivity.OnlineLcReactivityTask;
 import io.github.mzmine.parameters.ParameterSet;
@@ -25,6 +30,13 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jetbrains.annotations.NotNull;
+import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.config.IsotopeFactory;
+import org.openscience.cdk.config.Isotopes;
+import org.openscience.cdk.formula.MolecularFormulaRange;
+import org.openscience.cdk.interfaces.IIsotope;
+import org.openscience.cdk.interfaces.IMolecularFormula;
+import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 
 public class PostColumnReactionTask extends AbstractFeatureListTask {
 
@@ -138,6 +150,13 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
 
   private void annotateUnannotatedFeature(FeatureListRow correlatedRow, FeatureListRow baseRow) {
     if (correlatedRow.getPreferredAnnotation() == null || correlatedRow.getCompoundAnnotations().isEmpty()) {
+//      Optional<FeatureAnnotation> annotationWithFormula = CompoundAnnotationUtils.streamFeatureAnnotations(baseRow)
+//          .filter(a -> StringUtils.hasValue(a.getFormula())).findFirst();
+//
+//      if(annotationWithFormula.isPresent()) {
+//        FeatureAnnotation annotation = annotationWithFormula.get();
+//      }
+
       String baseAnnotation = baseRow.getPreferredAnnotationName();
       if (baseAnnotation != null) {
         String roundedMz = String.valueOf(Math.round(correlatedRow.getAverageMZ()));
@@ -161,7 +180,45 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
         annotation.put(PrecursorMZType.class, correlatedRow.getAverageMZ());
         annotation.put(CompoundNameType.class, tpAnnotation);
         correlatedRow.addCompoundAnnotation(annotation);
+
+        predictCorrelatedFormula(correlatedRow, baseRow);
       }
+    }
+  }
+
+  public static void predictCorrelatedFormula(FeatureListRow correlatedRow, FeatureListRow baseRow) {
+
+    try {
+      FormulaPredictionFeatureListParameters params = new FormulaPredictionFeatureListParameters();
+      MolecularFormulaRange molecularFormulaRange = new MolecularFormulaRange();
+      List<CompoundDBAnnotation> baseRowCompoundAnnotations = baseRow.getCompoundAnnotations();
+      String baseFomrulaString = baseRowCompoundAnnotations.getFirst().getFormula();
+      IMolecularFormula baseFormula = MolecularFormulaManipulator.getMolecularFormula(baseFomrulaString, DefaultChemObjectBuilder.getInstance());
+
+      Iterable<IIsotope> isotopes = baseFormula.isotopes();
+      List<FeatureListRow> correlatedRows = new ArrayList<>();  // this is not yet very elegant. The task creates a feature list with one row for each prediction because the prediction task uses a feature list as input. Maybe create one feature list for all correlated rows of one annotation and then run the formula prediction. Alternatively, the prediction task can be adjusted to accept one single feature list row.
+      correlatedRows.add(correlatedRow);
+      IsotopeFactory iFac = Isotopes.getInstance();
+
+      for (IIsotope i : isotopes) {
+        IIsotope majorIsotope = iFac.getMajorIsotope(i.getSymbol());
+        int baseIsotopeCount = baseFormula.getIsotopeCount(i);
+        int isotopeCount = baseIsotopeCount;
+        if (i.getSymbol() == "O" || i.getSymbol() == "H") {
+            isotopeCount = baseIsotopeCount + 8;
+        }
+        molecularFormulaRange.addIsotope(majorIsotope, 0, isotopeCount);
+      }
+
+      ParameterSet parameters = params.cloneParameterSet();
+      parameters.getParameter(elements).setValue(molecularFormulaRange);
+
+      FormulaPredictionFeatureListTask newTask =
+          new FormulaPredictionFeatureListTask(null, correlatedRows, parameters, Instant.now());
+      newTask.run();
+    }
+    catch (Exception e) {
+        logger.severe("Error predicting molecular formula: " + e.getMessage());
     }
   }
 

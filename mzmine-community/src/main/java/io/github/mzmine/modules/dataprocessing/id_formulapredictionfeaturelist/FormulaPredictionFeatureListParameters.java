@@ -26,11 +26,13 @@ package io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist;
 
 import io.github.mzmine.datamodel.IonizationType;
 import io.github.mzmine.modules.dataprocessing.id_formula_sort.FormulaSortParameters;
+import io.github.mzmine.modules.dataprocessing.id_formulaprediction.FormulaPredictionParameters;
 import io.github.mzmine.modules.dataprocessing.id_formulaprediction.restrictions.elements.ElementalHeuristicParameters;
 import io.github.mzmine.modules.dataprocessing.id_formulaprediction.restrictions.rdbe.RDBERestrictionParameters;
 import io.github.mzmine.modules.tools.isotopepatternscore.IsotopePatternScoreParameters;
 import io.github.mzmine.modules.tools.msmsscore.MSMSScoreParameters;
 import io.github.mzmine.parameters.Parameter;
+import io.github.mzmine.parameters.ParameterSet;
 import io.github.mzmine.parameters.impl.IonMobilitySupport;
 import io.github.mzmine.parameters.impl.SimpleParameterSet;
 import io.github.mzmine.parameters.parametertypes.ComboParameter;
@@ -40,6 +42,7 @@ import io.github.mzmine.parameters.parametertypes.selectors.FeatureListsParamete
 import io.github.mzmine.parameters.parametertypes.submodules.OptionalModuleParameter;
 import io.github.mzmine.parameters.parametertypes.tolerances.MZToleranceParameter;
 import org.jetbrains.annotations.NotNull;
+import org.openscience.cdk.formula.MolecularFormulaRange;
 
 public class FormulaPredictionFeatureListParameters extends SimpleParameterSet {
 
@@ -83,6 +86,32 @@ public class FormulaPredictionFeatureListParameters extends SimpleParameterSet {
         new Parameter[]{FEATURE_LISTS, ionization, sorting, mzTolerance, maxBestFormulasPerFeature,
             elements, elementalRatios, rdbeRestrictions, isotopeFilter, msmsFilter},
         "https://mzmine.github.io/mzmine_documentation/module_docs/id_spectra_chem_formula/chem-formula-pred.html");
+  }
+
+  //Create standard parameter set to call formula prediction from other modules.
+  public static ParameterSet create() {
+    ParameterSet params = new FormulaPredictionParameters().cloneParameterSet();
+    params.getParameter(ionization).setValue(IonizationType.POSITIVE);
+    params.setParameter(elementalRatios, false);
+    params.setParameter(rdbeRestrictions, false);
+    params.setParameter(isotopeFilter, false);
+    params.setParameter(msmsFilter, false);
+
+    return params;
+  }
+
+  //Create standard parameter set to call formula prediction from other modules.
+  public static ParameterSet create(MolecularFormulaRange molecularFormulaRange) {
+    ParameterSet params = new FormulaPredictionParameters().cloneParameterSet();
+
+    params.getParameter(ionization).setValue(IonizationType.POSITIVE);
+    params.getParameter(elements).setValue(molecularFormulaRange);
+    params.setParameter(elementalRatios, false);
+    params.setParameter(rdbeRestrictions, false);
+    params.setParameter(isotopeFilter, false);
+    params.setParameter(msmsFilter, false);
+
+    return params;
   }
 
   @Override
