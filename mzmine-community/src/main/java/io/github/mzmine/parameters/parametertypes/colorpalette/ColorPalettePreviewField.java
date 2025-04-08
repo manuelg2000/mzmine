@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,19 +25,13 @@
 
 package io.github.mzmine.parameters.parametertypes.colorpalette;
 
+import io.github.mzmine.util.color.SimpleColorPalette;
 import io.github.mzmine.util.javafx.DraggableRectangle;
 import io.github.mzmine.util.javafx.DraggableRectangleContainer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-import io.github.mzmine.util.color.SimpleColorPalette;
 import javafx.collections.ListChangeListener;
-import javafx.geometry.Point2D;
-import javafx.scene.Parent;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

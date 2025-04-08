@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The mzmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -12,6 +12,7 @@
  *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,6 +24,11 @@
  */
 
 package io.github.mzmine.modules.io.import_rawdata_all;
+
+import static io.github.mzmine.util.RawDataFileTypeDetector.BAF_SUFFIX;
+import static io.github.mzmine.util.RawDataFileTypeDetector.BRUKER_FOLDER_SUFFIX;
+import static io.github.mzmine.util.RawDataFileTypeDetector.TDF_SUFFIX;
+import static io.github.mzmine.util.RawDataFileTypeDetector.TSF_SUFFIX;
 
 import com.google.common.collect.Range;
 import io.github.mzmine.datamodel.MZmineProject;
@@ -59,10 +65,6 @@ import io.github.mzmine.taskcontrol.Task;
 import io.github.mzmine.util.ExitCode;
 import io.github.mzmine.util.MemoryMapStorage;
 import io.github.mzmine.util.RawDataFileType;
-import static io.github.mzmine.util.RawDataFileTypeDetector.BAF_SUFFIX;
-import static io.github.mzmine.util.RawDataFileTypeDetector.BRUKER_FOLDER_SUFFIX;
-import static io.github.mzmine.util.RawDataFileTypeDetector.TDF_SUFFIX;
-import static io.github.mzmine.util.RawDataFileTypeDetector.TSF_SUFFIX;
 import io.github.mzmine.util.collections.CollectionUtils;
 import io.github.mzmine.util.spectraldb.entry.SpectralLibrary;
 import java.io.File;

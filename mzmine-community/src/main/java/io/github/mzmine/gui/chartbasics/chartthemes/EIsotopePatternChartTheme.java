@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,7 @@
 
 package io.github.mzmine.gui.chartbasics.chartthemes;
 
+import io.github.mzmine.gui.chartbasics.chartthemes.ChartThemeFactory.THEME;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
@@ -32,8 +33,6 @@ import org.jfree.chart.ChartColor;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.plot.XYPlot;
-
-import io.github.mzmine.gui.chartbasics.chartthemes.ChartThemeFactory.THEME;
 
 /**
  * Chart theme used to display isotope pattern in prieviews

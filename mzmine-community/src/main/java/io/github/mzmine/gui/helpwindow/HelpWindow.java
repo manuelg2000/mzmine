@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,10 +25,10 @@
 
 package io.github.mzmine.gui.helpwindow;
 
+import com.google.common.base.Strings;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Logger;
-import com.google.common.base.Strings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;

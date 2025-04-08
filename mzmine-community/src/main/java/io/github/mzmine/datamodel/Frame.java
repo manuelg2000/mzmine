@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -30,7 +30,6 @@ import io.github.mzmine.datamodel.featuredata.impl.SimpleIonMobilogramTimeSeries
 import io.github.mzmine.datamodel.impl.MobilityScanStorage;
 import io.github.mzmine.datamodel.impl.StoredMobilityScan;
 import io.github.mzmine.datamodel.msms.IonMobilityMsMsInfo;
-import io.github.mzmine.datamodel.msms.PasefMsMsInfo;
 import it.unimi.dsi.fastutil.doubles.DoubleImmutableList;
 import java.util.List;
 import java.util.Set;

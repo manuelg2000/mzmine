@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,17 +25,6 @@
 
 package io.github.mzmine.gui.chartbasics.gestures;
 
-import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
-import java.util.ArrayList;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.ValueAxis;
-import org.jfree.chart.entity.AxisEntity;
-import org.jfree.chart.entity.ChartEntity;
-import org.jfree.chart.fx.ChartViewer;
-import org.jfree.chart.plot.PlotOrientation;
-
 import io.github.mzmine.gui.chartbasics.ChartLogics;
 import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Entity;
 import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Event;
@@ -43,7 +32,17 @@ import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Key;
 import io.github.mzmine.gui.chartbasics.gui.swing.ChartGestureMouseAdapter;
 import io.github.mzmine.gui.chartbasics.gui.wrapper.ChartViewWrapper;
 import io.github.mzmine.gui.chartbasics.gui.wrapper.MouseEventWrapper;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import javafx.scene.input.ScrollEvent;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.entity.AxisEntity;
+import org.jfree.chart.entity.ChartEntity;
+import org.jfree.chart.fx.ChartViewer;
+import org.jfree.chart.plot.PlotOrientation;
 
 /**
  * {@link ChartGesture}s are part of {@link ChartGestureEvent} which are generated and processed by

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,12 +25,11 @@
 
 package io.github.mzmine.util.components;
 
-import org.controlsfx.glyphfont.Glyph;
-
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import org.controlsfx.glyphfont.Glyph;
 
 /**
  * @author akshaj This class represents the eye button in the table of Fx3DVisualizer.

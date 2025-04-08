@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,20 +25,17 @@
 
 package io.github.mzmine.modules.visualization.spectra.simplespectra.datapointprocessing;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.logging.Logger;
-import org.jetbrains.annotations.NotNull;
-
 import io.github.mzmine.datamodel.Scan;
 import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.modules.MZmineModule;
-import io.github.mzmine.modules.MZmineProcessingStep;
 import io.github.mzmine.modules.visualization.spectra.simplespectra.datapointprocessing.DataPointProcessingController.ControllerStatus;
 import io.github.mzmine.modules.visualization.spectra.simplespectra.datapointprocessing.datamodel.DPPParameterValueWrapper;
 import io.github.mzmine.modules.visualization.spectra.simplespectra.datapointprocessing.datamodel.MSLevel;
 import io.github.mzmine.parameters.ParameterSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * There will be a single instance of this class, use getInst(). This class keeps track of every

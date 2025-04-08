@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,13 +25,12 @@
 
 package io.github.mzmine.gui.preferences;
 
+import io.github.mzmine.util.EMailUtil;
 import java.io.IOException;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-
-import io.github.mzmine.util.EMailUtil;
 
 /**
  * Class to send an error messsage only smtp support

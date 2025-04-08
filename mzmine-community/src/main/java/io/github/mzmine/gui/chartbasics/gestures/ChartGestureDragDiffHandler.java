@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,12 @@
 
 package io.github.mzmine.gui.chartbasics.gestures;
 
+import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Entity;
+import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Event;
+import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.GestureButton;
+import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Key;
+import io.github.mzmine.gui.chartbasics.gui.wrapper.ChartViewWrapper;
+import io.github.mzmine.gui.chartbasics.gui.wrapper.MouseEventWrapper;
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
@@ -32,13 +38,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.AxisEntity;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.plot.PlotOrientation;
-
-import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.GestureButton;
-import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Entity;
-import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Event;
-import io.github.mzmine.gui.chartbasics.gestures.ChartGesture.Key;
-import io.github.mzmine.gui.chartbasics.gui.wrapper.ChartViewWrapper;
-import io.github.mzmine.gui.chartbasics.gui.wrapper.MouseEventWrapper;
 
 /**
  * The {@link ChartGestureDragDiffHandler} consumes primary mouse events to generate

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -37,8 +37,6 @@
 
 package io.github.mzmine.modules.io.spectraldbsubmit.param;
 
-import java.text.DecimalFormat;
-
 import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.modules.io.spectraldbsubmit.formats.GnpsValues.CompoundSource;
 import io.github.mzmine.modules.io.spectraldbsubmit.formats.GnpsValues.Instrument;
@@ -51,6 +49,7 @@ import io.github.mzmine.parameters.parametertypes.DoubleParameter;
 import io.github.mzmine.parameters.parametertypes.IntegerParameter;
 import io.github.mzmine.parameters.parametertypes.OptionalParameter;
 import io.github.mzmine.parameters.parametertypes.StringParameter;
+import java.text.DecimalFormat;
 
 /**
  * 

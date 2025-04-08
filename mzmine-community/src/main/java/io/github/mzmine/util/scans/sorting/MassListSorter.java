@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -26,10 +26,8 @@
 package io.github.mzmine.util.scans.sorting;
 
 import io.github.mzmine.datamodel.MassSpectrum;
-import java.util.Comparator;
-
-import io.github.mzmine.datamodel.DataPoint;
 import io.github.mzmine.util.scans.ScanUtils;
+import java.util.Comparator;
 
 public class MassListSorter implements Comparator<MassSpectrum> {
   private double noiseLevel;

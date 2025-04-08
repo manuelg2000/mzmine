@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,8 +25,8 @@
 
 package io.github.mzmine.datamodel;
 
-import java.util.List;
 import io.github.mzmine.modules.io.import_rawdata_imzml.ImagingParameters;
+import java.util.List;
 
 
 /**

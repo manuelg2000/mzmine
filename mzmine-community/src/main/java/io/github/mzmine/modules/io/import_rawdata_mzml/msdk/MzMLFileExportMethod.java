@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,16 +25,6 @@
 
 package io.github.mzmine.modules.io.import_rawdata_mzml.msdk;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.security.DigestOutputStream;
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
-import org.jetbrains.annotations.NotNull;
-import org.apache.commons.codec.digest.DigestUtils;
 import io.github.msdk.MSDKException;
 import io.github.msdk.MSDKMethod;
 import io.github.msdk.datamodel.ActivationInfo;
@@ -57,8 +47,18 @@ import io.github.msdk.io.mzml.data.MzMLPrecursorSelectedIon;
 import io.github.msdk.io.mzml.data.MzMLProduct;
 import io.github.msdk.io.mzml.data.MzMLRawDataFile;
 import io.github.msdk.io.mzml.data.MzMLTags;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.security.DigestOutputStream;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 import javolution.xml.internal.stream.XMLStreamWriterImpl;
 import javolution.xml.stream.XMLStreamException;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.jetbrains.annotations.NotNull;
 
 
 /**

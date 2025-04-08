@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -26,8 +26,8 @@
 package io.github.mzmine.gui;
 
 import io.github.mzmine.gui.mainwindow.MZmineTab;
-import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.javafx.util.FxIconUtil;
+import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.util.javafx.WindowsMenu;
 import java.util.Arrays;
 import javafx.collections.ListChangeListener;

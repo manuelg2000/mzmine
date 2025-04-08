@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,8 @@
 
 package io.github.mzmine.modules.dataprocessing.id_lipidid.common.identification;
 
+import static io.github.mzmine.util.StringUtils.inQuotes;
+
 import io.github.mzmine.datamodel.IonizationType;
 import io.github.mzmine.datamodel.PolarityType;
 import io.github.mzmine.modules.dataprocessing.id_lipidid.common.lipids.LipidAnnotationLevel;
@@ -32,7 +34,6 @@ import io.github.mzmine.modules.dataprocessing.id_lipidid.utils.LipidParsingUtil
 import io.github.mzmine.modules.io.projectload.version_3_0.CONST;
 import io.github.mzmine.util.FormulaUtils;
 import io.github.mzmine.util.ParsingUtils;
-import static io.github.mzmine.util.StringUtils.inQuotes;
 import io.mzio.general.Result;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;

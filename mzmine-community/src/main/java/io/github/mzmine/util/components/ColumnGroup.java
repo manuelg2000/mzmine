@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -29,7 +29,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Enumeration;
 import java.util.Vector;
-
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.UIManager;

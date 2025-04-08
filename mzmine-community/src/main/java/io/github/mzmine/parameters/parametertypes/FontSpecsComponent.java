@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,14 +25,14 @@
 
 package io.github.mzmine.parameters.parametertypes;
 
-import org.jetbrains.annotations.NotNull;
-import org.controlsfx.dialog.FontSelectorDialog;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import org.controlsfx.dialog.FontSelectorDialog;
+import org.jetbrains.annotations.NotNull;
 
 public class FontSpecsComponent extends FlowPane {
 

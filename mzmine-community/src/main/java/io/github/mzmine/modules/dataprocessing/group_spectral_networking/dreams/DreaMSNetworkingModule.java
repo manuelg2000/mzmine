@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The mzmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -26,7 +26,6 @@
 package io.github.mzmine.modules.dataprocessing.group_spectral_networking.dreams;
 
 import io.github.mzmine.modules.MZmineModule;
-import io.github.mzmine.modules.dataprocessing.group_spectral_networking.dreams.DreaMSNetworkingParameters;
 import io.github.mzmine.parameters.ParameterSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2023 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -26,12 +26,13 @@
 package io.github.mzmine.util;
 
 
+import static io.github.mzmine.modules.visualization.networking.visual.enums.NodeAtt.COMMUNITY_ID;
+import static io.github.mzmine.modules.visualization.networking.visual.enums.NodeAtt.COMMUNITY_SIZE;
+
 import io.github.mzmine.modules.dataprocessing.group_spectral_networking.NetworkCluster;
 import io.github.mzmine.modules.visualization.networking.visual.enums.EdgeAtt;
 import io.github.mzmine.modules.visualization.networking.visual.enums.ElementType;
 import io.github.mzmine.modules.visualization.networking.visual.enums.NodeAtt;
-import static io.github.mzmine.modules.visualization.networking.visual.enums.NodeAtt.COMMUNITY_ID;
-import static io.github.mzmine.modules.visualization.networking.visual.enums.NodeAtt.COMMUNITY_SIZE;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.util.ArrayList;

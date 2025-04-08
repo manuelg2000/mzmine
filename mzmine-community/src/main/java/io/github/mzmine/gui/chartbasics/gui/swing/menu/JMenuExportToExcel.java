@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,10 @@
 
 package io.github.mzmine.gui.chartbasics.gui.swing.menu;
 
+import io.github.mzmine.gui.chartbasics.gui.swing.EChartPanel;
+import io.github.mzmine.util.files.FileAndPathUtil;
+import io.github.mzmine.util.files.FileTypeFilter;
+import io.github.mzmine.util.io.XSSFExcelWriterReader;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -33,10 +37,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import io.github.mzmine.gui.chartbasics.gui.swing.EChartPanel;
-import io.github.mzmine.util.files.FileAndPathUtil;
-import io.github.mzmine.util.files.FileTypeFilter;
-import io.github.mzmine.util.io.XSSFExcelWriterReader;
 
 public class JMenuExportToExcel extends JMenuItem implements MenuExport {
   private static final long serialVersionUID = 1L;

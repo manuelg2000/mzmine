@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,7 @@
 
 package io.github.mzmine.gui.framework.strokechooser;
 
+import io.github.mzmine.gui.framework.listener.DelayedDocumentListener;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -50,7 +51,6 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
-import io.github.mzmine.gui.framework.listener.DelayedDocumentListener;
 import net.miginfocom.swing.MigLayout;
 
 public class JStrokeChooserDialog extends JDialog {

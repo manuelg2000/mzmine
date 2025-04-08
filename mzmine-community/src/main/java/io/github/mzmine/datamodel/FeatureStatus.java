@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,10 +25,10 @@
 
 package io.github.mzmine.datamodel;
 
+import io.github.mzmine.javafx.util.color.Vision;
+import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.util.color.SimpleColorPalette;
 import java.awt.Color;
-import io.github.mzmine.main.MZmineCore;
-import io.github.mzmine.javafx.util.color.Vision;
 
 public enum FeatureStatus {
 

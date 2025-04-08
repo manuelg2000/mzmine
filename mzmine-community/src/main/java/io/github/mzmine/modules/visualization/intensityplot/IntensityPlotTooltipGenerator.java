@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,16 +25,14 @@
 
 package io.github.mzmine.modules.visualization.intensityplot;
 
+import io.github.mzmine.datamodel.RawDataFile;
+import io.github.mzmine.datamodel.features.Feature;
+import io.github.mzmine.main.MZmineCore;
 import java.text.Format;
-
 import org.jfree.chart.labels.CategoryToolTipGenerator;
 import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.xy.XYDataset;
-
-import io.github.mzmine.datamodel.features.Feature;
-import io.github.mzmine.datamodel.RawDataFile;
-import io.github.mzmine.main.MZmineCore;
 
 /**
  * 

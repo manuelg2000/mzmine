@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,10 +25,6 @@
 
 package io.github.mzmine.modules.io.export_rawdata_mzml;
 
-import java.io.File;
-import java.time.Instant;
-import java.util.logging.Logger;
-
 import io.github.msdk.MSDKMethod;
 import io.github.msdk.io.mzml.MzMLFileExportMethod;
 import io.github.msdk.io.mzml.data.MzMLCompressionType;
@@ -37,6 +33,9 @@ import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.datamodel.impl.MZmineToMSDKRawDataFile;
 import io.github.mzmine.taskcontrol.AbstractTask;
 import io.github.mzmine.taskcontrol.TaskStatus;
+import java.io.File;
+import java.time.Instant;
+import java.util.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 
 public class MzMLExportTask extends AbstractTask {

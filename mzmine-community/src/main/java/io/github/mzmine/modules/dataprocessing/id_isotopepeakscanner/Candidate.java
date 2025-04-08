@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,11 +25,11 @@
 
 package io.github.mzmine.modules.dataprocessing.id_isotopepeakscanner;
 
-import java.util.ArrayList;
 import io.github.mzmine.datamodel.DataPoint;
 import io.github.mzmine.datamodel.IsotopePattern;
 import io.github.mzmine.datamodel.features.FeatureListRow;
 import io.github.mzmine.util.scans.ScanUtils;
+import java.util.ArrayList;
 
 /**
  * This class is used to calculate ratings and store the peak with the best rating. Intensities and

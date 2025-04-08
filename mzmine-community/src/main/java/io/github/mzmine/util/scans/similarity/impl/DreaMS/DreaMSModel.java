@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2024 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -38,7 +38,6 @@ import ai.djl.training.util.ProgressBar;
 import ai.djl.translate.TranslateException;
 import io.github.mzmine.datamodel.MassSpectrum;
 import io.github.mzmine.util.scans.similarity.impl.ms2deepscore.EmbeddingBasedSimilarity;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;

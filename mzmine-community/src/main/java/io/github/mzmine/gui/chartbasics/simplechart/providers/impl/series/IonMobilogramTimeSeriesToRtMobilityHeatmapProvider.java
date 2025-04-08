@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -34,10 +34,10 @@ import io.github.mzmine.gui.chartbasics.chartutils.paintscales.PaintScaleTransfo
 import io.github.mzmine.gui.chartbasics.simplechart.providers.MassSpectrumProvider;
 import io.github.mzmine.gui.chartbasics.simplechart.providers.PaintScaleProvider;
 import io.github.mzmine.gui.chartbasics.simplechart.providers.PlotXYZDataProvider;
+import io.github.mzmine.javafx.util.FxColorUtil;
 import io.github.mzmine.taskcontrol.TaskStatus;
 import io.github.mzmine.util.FeatureUtils;
 import io.github.mzmine.util.color.SimpleColorPalette;
-import io.github.mzmine.javafx.util.FxColorUtil;
 import java.awt.Color;
 import javafx.beans.property.Property;
 import org.jetbrains.annotations.Nullable;

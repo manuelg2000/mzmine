@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -28,6 +28,8 @@ package io.github.mzmine.gui.framework;
 // ColorPicker.java
 // A quick test of the JColorChooser dialog.
 //
+
+import io.github.mzmine.gui.framework.listener.ColorChangedListener;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -40,7 +42,6 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JDialog;
-import io.github.mzmine.gui.framework.listener.ColorChangedListener;
 
 public class JColorPickerButton extends JButton {
   private static final long serialVersionUID = 1L;

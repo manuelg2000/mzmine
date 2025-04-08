@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,6 +25,12 @@
 
 package io.github.mzmine.gui.chartbasics.gui.wrapper;
 
+import io.github.mzmine.gui.chartbasics.ChartLogics;
+import io.github.mzmine.gui.chartbasics.ChartLogicsFX;
+import io.github.mzmine.gui.chartbasics.gui.javafx.EChartViewer;
+import io.github.mzmine.gui.chartbasics.gui.swing.ChartGestureMouseAdapter;
+import io.github.mzmine.gui.chartbasics.gui.swing.EChartPanel;
+import io.github.mzmine.gui.chartbasics.listener.ZoomHistory;
 import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
 import org.jfree.chart.ChartPanel;
@@ -33,13 +39,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.entity.ChartEntity;
 import org.jfree.chart.fx.ChartViewer;
 import org.jfree.chart.plot.XYPlot;
-
-import io.github.mzmine.gui.chartbasics.ChartLogics;
-import io.github.mzmine.gui.chartbasics.ChartLogicsFX;
-import io.github.mzmine.gui.chartbasics.gui.javafx.EChartViewer;
-import io.github.mzmine.gui.chartbasics.gui.swing.ChartGestureMouseAdapter;
-import io.github.mzmine.gui.chartbasics.gui.swing.EChartPanel;
-import io.github.mzmine.gui.chartbasics.listener.ZoomHistory;
 
 public class ChartViewWrapper {
 

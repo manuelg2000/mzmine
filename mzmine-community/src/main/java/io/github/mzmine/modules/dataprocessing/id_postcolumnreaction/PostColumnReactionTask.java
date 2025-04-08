@@ -1,3 +1,28 @@
+/*
+ * Copyright (c) 2004-2025 The mzmine Development Team
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package io.github.mzmine.modules.dataprocessing.id_postcolumnreaction;
 
 import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.elementalRatios;
@@ -64,13 +89,13 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   private final ParameterSet predParamSet;
 
 
-  public PostColumnReactionTask(@NotNull ParameterSet parameters,
-      @NotNull Instant moduleCallDate) {
+  public PostColumnReactionTask(@NotNull ParameterSet parameters, @NotNull Instant moduleCallDate) {
     super(null, moduleCallDate, parameters, OnlineLcReactivityModule.class);
 
     RawDataFilesSelection unreactedSelection = parameters.getParameter(
         PostColumnReactionParameters.unreactedRawDataFiles).getValue();
-    IonizationType ionType = parameters.getParameter(PostColumnReactionParameters.ionization).getValue();
+    IonizationType ionType = parameters.getParameter(PostColumnReactionParameters.ionization)
+        .getValue();
     MZTolerance predMzTolerance = parameters.getParameter(PostColumnReactionParameters.mzTolerance)
         .getValue();
     boolean checkHeurParams = parameters.getParameter(PostColumnReactionParameters.elementalRatios)
@@ -90,8 +115,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     MSMSScoreParameters msmsParams = parameters.getParameter(
         PostColumnReactionParameters.msmsFilter).getEmbeddedParameters();
     this.unreactedRaws = List.of(unreactedSelection.getMatchingRawDataFiles().clone());
-    this.flist = parameters.getParameter(
-            PostColumnReactionParameters.flist).getValue()
+    this.flist = parameters.getParameter(PostColumnReactionParameters.flist).getValue()
         .getMatchingFeatureLists()[0];
     int totalRows = flist.getNumberOfRows();
     FormulaPredictionFeatureListParameters predParams = new FormulaPredictionFeatureListParameters();
@@ -100,38 +124,34 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     this.predParamSet.getParameter(mzTolerance).setValue(predMzTolerance);
 
     //heurParams
-    if(checkHeurParams){
+    if (checkHeurParams) {
       this.predParamSet.getParameter(elementalRatios).setValue(true);
       this.predParamSet.getParameter(elementalRatios).setEmbeddedParameters(heurParams);
-    }
-    else {
+    } else {
       this.predParamSet.getParameter(elementalRatios).setValue(false);
     }
 
     //rdbeParams
-    if(checkRDBEParams){
+    if (checkRDBEParams) {
       this.predParamSet.getParameter(rdbeRestrictions).setValue(true);
       this.predParamSet.getParameter(rdbeRestrictions).setEmbeddedParameters(rdbeParams);
-    }
-    else {
+    } else {
       this.predParamSet.getParameter(rdbeRestrictions).setValue(false);
     }
 
     //isotopeParams
-    if(checkIsotopeParams){
+    if (checkIsotopeParams) {
       this.predParamSet.getParameter(isotopeFilter).setValue(true);
       this.predParamSet.getParameter(isotopeFilter).setEmbeddedParameters(isotopeParams);
-    }
-    else {
+    } else {
       this.predParamSet.getParameter(isotopeFilter).setValue(false);
     }
 
     //msmsParams
-    if(checkMSMSParams){
+    if (checkMSMSParams) {
       this.predParamSet.getParameter(msmsFilter).setValue(true);
       this.predParamSet.getParameter(msmsFilter).setEmbeddedParameters(msmsParams);
-    }
-    else {
+    } else {
       this.predParamSet.getParameter(msmsFilter).setValue(false);
     }
 
@@ -182,7 +202,8 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     }
 
     // Filter rows with annotations
-    List<FeatureListRow> annotatedRows = rows.stream().filter(FeatureListRow::isIdentified).toList();
+    List<FeatureListRow> annotatedRows = rows.stream().filter(FeatureListRow::isIdentified)
+        .toList();
 
     if (annotatedRows.isEmpty()) {
       logger.info("No annotated rows in feature list " + flist.getName());
@@ -218,7 +239,8 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   }
 
   private void annotateUnannotatedFeature(FeatureListRow correlatedRow, FeatureListRow baseRow) {
-    if (correlatedRow.getPreferredAnnotation() == null || correlatedRow.getCompoundAnnotations().isEmpty()) {
+    if (correlatedRow.getPreferredAnnotation() == null || correlatedRow.getCompoundAnnotations()
+        .isEmpty()) {
 //      Optional<FeatureAnnotation> annotationWithFormula = CompoundAnnotationUtils.streamFeatureAnnotations(baseRow)
 //          .filter(a -> StringUtils.hasValue(a.getFormula())).findFirst();
 //
@@ -263,31 +285,37 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
       String baseFomrulaString;
       baseFomrulaString = baseRowCompoundAnnotations.getFirst().getFormula();
       assert baseFomrulaString != null;
-      IMolecularFormula baseFormula = MolecularFormulaManipulator.getMolecularFormula(baseFomrulaString, DefaultChemObjectBuilder.getInstance());
+      IMolecularFormula baseFormula = MolecularFormulaManipulator.getMolecularFormula(
+          baseFomrulaString, DefaultChemObjectBuilder.getInstance());
 
       Iterable<IIsotope> isotopes = baseFormula.isotopes();
       List<FeatureListRow> correlatedRows = new ArrayList<>();  // this is not yet very elegant. The task creates a feature list with one row for each prediction because the prediction task uses a feature list as input. Maybe create one feature list for all correlated rows of one annotation and then run the formula prediction. Alternatively, the prediction task can be adjusted to accept one single feature list row.
       correlatedRows.add(correlatedRow);
       IsotopeFactory iFac = Isotopes.getInstance();
+      IIsotope oxygenIsotope = iFac.getMajorIsotope("O");
 
       for (IIsotope i : isotopes) {
         IIsotope majorIsotope = iFac.getMajorIsotope(i.getSymbol());
         int baseIsotopeCount = baseFormula.getIsotopeCount(i);
         int isotopeCount = baseIsotopeCount;
         if (Objects.equals(i.getSymbol(), "O") || Objects.equals(i.getSymbol(), "H")) {
-            isotopeCount = baseIsotopeCount + 8;
+          isotopeCount = baseIsotopeCount + 8;
         }
         molecularFormulaRange.addIsotope(majorIsotope, 0, isotopeCount);
       }
 
-      this.predParamSet.getParameter(elements).setValue(molecularFormulaRange);
+      if (molecularFormulaRange.contains(oxygenIsotope)) {
+        this.predParamSet.getParameter(elements).setValue(molecularFormulaRange);
+      } else {
+        molecularFormulaRange.addIsotope(oxygenIsotope, 0, 8);
+        this.predParamSet.getParameter(elements).setValue(molecularFormulaRange);
+      }
 
-      FormulaPredictionFeatureListTask newTask =
-          new FormulaPredictionFeatureListTask(null, correlatedRows, this.predParamSet, Instant.now());
+      FormulaPredictionFeatureListTask newTask = new FormulaPredictionFeatureListTask(null,
+          correlatedRows, this.predParamSet, Instant.now());
       newTask.run();
-    }
-    catch (Exception e) {
-        logger.severe("Error predicting molecular formula: " + e.getMessage());
+    } catch (Exception e) {
+      logger.severe("Error predicting molecular formula: " + e.getMessage());
     }
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004-2022 The MZmine Development Team
+ * Copyright (c) 2004-2025 The mzmine Development Team
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,15 +25,15 @@
 
 package io.github.mzmine.modules.visualization.spectra.simplespectra.datasets;
 
+import io.github.msdk.MSDKRuntimeException;
+import io.github.mzmine.datamodel.IsotopePattern;
+import io.github.mzmine.datamodel.impl.SimpleIsotopePattern;
 import java.util.ArrayList;
 import java.util.List;
 import org.jfree.data.xy.IntervalXYDelegate;
 import org.jfree.data.xy.XYBarDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import io.github.msdk.MSDKRuntimeException;
-import io.github.mzmine.datamodel.IsotopePattern;
-import io.github.mzmine.datamodel.impl.SimpleIsotopePattern;
 
 /**
  *
