@@ -334,7 +334,7 @@ public class IntegrationTestUtils {
           new MZmineProcessingStepImpl<>(MZmineCore.getModuleInstance(CSVExportModularModule.class),
               parameters));
     }
-    csvExportFile.deleteOnExit();
+//    csvExportFile.deleteOnExit();
     return csvExportFile;
   }
 
