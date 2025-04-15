@@ -45,6 +45,7 @@ import io.github.mzmine.datamodel.features.correlation.RowsRelationship;
 import io.github.mzmine.datamodel.features.types.annotations.CompoundNameType;
 import io.github.mzmine.datamodel.features.types.numbers.PrecursorMZType;
 import io.github.mzmine.main.MZmineCore;
+import io.github.mzmine.modules.dataprocessing.id_formulaprediction.ResultFormula;
 import io.github.mzmine.modules.dataprocessing.id_formulaprediction.restrictions.elements.ElementalHeuristicParameters;
 import io.github.mzmine.modules.dataprocessing.id_formulaprediction.restrictions.rdbe.RDBERestrictionParameters;
 import io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters;
@@ -273,6 +274,10 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
         correlatedRow.addCompoundAnnotation(annotation);
 
         predictCorrelatedFormula(correlatedRow, baseRow);
+        if (correlatedRow.getFormulas() != null && correlatedRow.getFormulas().size() > 0) {
+          ResultFormula correlatedFormula = correlatedRow.getFormulas().getFirst();
+          annotation.setFormula(correlatedFormula.toString());
+        }
       }
     }
   }
