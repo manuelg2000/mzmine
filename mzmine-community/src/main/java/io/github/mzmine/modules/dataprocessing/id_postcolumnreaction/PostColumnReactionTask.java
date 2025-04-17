@@ -83,13 +83,16 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   private final FeatureList flist;
   private final String description;
   private final Map<String, Integer> annotationCounts = new HashMap<>();
-
   private final List<RawDataFile> unreactedRaws;
   private final ParameterSet predParamSet;
+  private final double corrThreshold;
 
 
   public PostColumnReactionTask(@NotNull ParameterSet parameters, @NotNull Instant moduleCallDate) {
     super(null, moduleCallDate, parameters, OnlineLcReactivityModule.class);
+
+    corrThreshold = parameters.getParameter(PostColumnReactionParameters.correlationThreshold)
+        .getValue();
 
     RawDataFilesSelection unreactedSelection = parameters.getParameter(
         PostColumnReactionParameters.unreactedRawDataFiles).getValue();
@@ -220,8 +223,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     // Process correlated rows for each annotated row
     for (FeatureListRow annotatedRow : annotatedRows) {
       correlationMap.streamAllCorrelatedRows(annotatedRow, rows).forEach(rowsRelationship -> {
-        if (rowsRelationship.getScore()
-            >= 0.4) { //Introduce threshold as filter parameter during starting this module
+        if (rowsRelationship.getScore() >= corrThreshold) {
           FeatureListRow correlatedRow = rowsRelationship.getOtherRow(annotatedRow);
 
           // Check if the feature is present in any unreacted raw files

@@ -350,20 +350,20 @@ public class BatchModeModulesList {
           ImageCorrelateGroupingModule.class, //
           MainSpectralNetworkingModule.class, //
           AnnotateIsomersModule.class, //
+          PostColumnReactionModule.class, //
 
-      /*
-       * {@link io.github.mzmine.modules.MZmineModuleCategory#ION_IDENTITY_NETWORKS}
-       */
-      IonNetworkingModule.class, //
-      AddIonNetworkingModule.class, //
-      IonNetworkRefinementModule.class, //
-      IonNetworkMSMSCheckModule.class, //
-      FormulaPredictionIonNetworkModule.class, //
-      CreateAvgNetworkFormulasModule.class, //
-      IonNetRelationsModule.class, //
-      OnlineLcReactivityModule.class, //
-      PostColumnReactionModule.class, //
-      ClearIonIdentitiesModule.class, //
+          /*
+           * {@link io.github.mzmine.modules.MZmineModuleCategory#ION_IDENTITY_NETWORKS}
+           */
+          IonNetworkingModule.class, //
+          AddIonNetworkingModule.class, //
+          IonNetworkRefinementModule.class, //
+          IonNetworkMSMSCheckModule.class, //
+          FormulaPredictionIonNetworkModule.class, //
+          CreateAvgNetworkFormulasModule.class, //
+          IonNetRelationsModule.class, //
+          OnlineLcReactivityModule.class, //
+          ClearIonIdentitiesModule.class, //
 
       /*
         {@link io.github.mzmine.modules.MZmineModuleCategory.MainCategory#FEATURE_ANNOTATION}
