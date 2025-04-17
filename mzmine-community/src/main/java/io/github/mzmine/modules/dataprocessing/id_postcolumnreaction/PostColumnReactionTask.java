@@ -34,7 +34,6 @@ import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeatur
 import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.rdbeRestrictions;
 
 import io.github.mzmine.datamodel.IonizationType;
-import io.github.mzmine.datamodel.MZmineProject;
 import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.datamodel.features.FeatureList;
 import io.github.mzmine.datamodel.features.FeatureListRow;
@@ -85,7 +84,6 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   private final String description;
   private final Map<String, Integer> annotationCounts = new HashMap<>();
 
-  private MZmineProject project;
   private final List<RawDataFile> unreactedRaws;
   private final ParameterSet predParamSet;
 
@@ -118,7 +116,6 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     this.unreactedRaws = List.of(unreactedSelection.getMatchingRawDataFiles().clone());
     this.flist = parameters.getParameter(PostColumnReactionParameters.flist).getValue()
         .getMatchingFeatureLists()[0];
-    int totalRows = flist.getNumberOfRows();
     FormulaPredictionFeatureListParameters predParams = new FormulaPredictionFeatureListParameters();
     this.predParamSet = predParams.cloneParameterSet();
     this.predParamSet.getParameter(ionization).setValue(ionType);
@@ -223,15 +220,18 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
     // Process correlated rows for each annotated row
     for (FeatureListRow annotatedRow : annotatedRows) {
       correlationMap.streamAllCorrelatedRows(annotatedRow, rows).forEach(rowsRelationship -> {
-        FeatureListRow correlatedRow = rowsRelationship.getOtherRow(annotatedRow);
+        if (rowsRelationship.getScore()
+            >= 0.4) { //Introduce threshold as filter parameter during starting this module
+          FeatureListRow correlatedRow = rowsRelationship.getOtherRow(annotatedRow);
 
-        // Check if the feature is present in any unreacted raw files
-        boolean isInUnreacted = unreactedRaws.stream()
-            .anyMatch(unreactedRaw -> correlatedRow.hasFeature(unreactedRaw));
+          // Check if the feature is present in any unreacted raw files
+          boolean isInUnreacted;
+          isInUnreacted = unreactedRaws.stream().anyMatch(correlatedRow::hasFeature);
 
-        if (!isInUnreacted) {
-          // Annotate unannotated features
-          annotateUnannotatedFeature(correlatedRow, annotatedRow);
+          if (!isInUnreacted) {
+            // Annotate unannotated features
+            annotateUnannotatedFeature(correlatedRow, annotatedRow);
+          }
         }
       });
     }
@@ -274,7 +274,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
         correlatedRow.addCompoundAnnotation(annotation);
 
         predictCorrelatedFormula(correlatedRow, baseRow);
-        if (correlatedRow.getFormulas() != null && correlatedRow.getFormulas().size() > 0) {
+        if (correlatedRow.getFormulas() != null && !correlatedRow.getFormulas().isEmpty()) {
           ResultFormula correlatedFormula = correlatedRow.getFormulas().getFirst();
           annotation.setFormula(correlatedFormula.toString());
         }
