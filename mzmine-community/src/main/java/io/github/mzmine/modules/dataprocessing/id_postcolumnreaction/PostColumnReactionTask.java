@@ -32,8 +32,13 @@ import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeatur
 import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.msmsFilter;
 import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.mzTolerance;
 import static io.github.mzmine.modules.dataprocessing.id_formulapredictionfeaturelist.FormulaPredictionFeatureListParameters.rdbeRestrictions;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predElementalRatios;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predIonization;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predIsotopeFilter;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predMZTolerance;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predMsmsFilter;
+import static io.github.mzmine.modules.dataprocessing.id_postcolumnreaction.PostColumnReactionFormulaPredictionParameters.predRdbeRestrictions;
 
-import io.github.mzmine.datamodel.IonizationType;
 import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.datamodel.features.FeatureList;
 import io.github.mzmine.datamodel.features.FeatureListRow;
@@ -55,7 +60,6 @@ import io.github.mzmine.modules.tools.isotopepatternscore.IsotopePatternScorePar
 import io.github.mzmine.modules.tools.msmsscore.MSMSScoreParameters;
 import io.github.mzmine.parameters.ParameterSet;
 import io.github.mzmine.parameters.parametertypes.selectors.RawDataFilesSelection;
-import io.github.mzmine.parameters.parametertypes.tolerances.MZTolerance;
 import io.github.mzmine.taskcontrol.AbstractFeatureListTask;
 import io.github.mzmine.taskcontrol.TaskStatus;
 import io.github.mzmine.util.FeatureListRowSorter;
@@ -79,81 +83,67 @@ import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 public class PostColumnReactionTask extends AbstractFeatureListTask {
 
   private static final Logger logger = Logger.getLogger(OnlineLcReactivityTask.class.getName());
-
   private final FeatureList flist;
   private final String description;
   private final Map<String, Integer> annotationCounts = new HashMap<>();
   private final List<RawDataFile> unreactedRaws;
-  private final ParameterSet predParamSet;
   private final double corrThreshold;
+  private final boolean checkFormulaPred;
+  private FormulaPredictionFeatureListParameters predParamSet;
 
 
   public PostColumnReactionTask(@NotNull ParameterSet parameters, @NotNull Instant moduleCallDate) {
     super(null, moduleCallDate, parameters, OnlineLcReactivityModule.class);
 
-    corrThreshold = parameters.getParameter(PostColumnReactionParameters.correlationThreshold)
-        .getValue();
-
-    RawDataFilesSelection unreactedSelection = parameters.getParameter(
-        PostColumnReactionParameters.unreactedRawDataFiles).getValue();
-    IonizationType ionType = parameters.getParameter(PostColumnReactionParameters.ionization)
-        .getValue();
-    MZTolerance predMzTolerance = parameters.getParameter(PostColumnReactionParameters.mzTolerance)
-        .getValue();
-    boolean checkHeurParams = parameters.getParameter(PostColumnReactionParameters.elementalRatios)
-        .getValue();
-    ElementalHeuristicParameters heurParams = parameters.getParameter(
-        PostColumnReactionParameters.elementalRatios).getEmbeddedParameters();
-    boolean checkRDBEParams = parameters.getParameter(PostColumnReactionParameters.rdbeRestrictions)
-        .getValue();
-    RDBERestrictionParameters rdbeParams = parameters.getParameter(
-        PostColumnReactionParameters.rdbeRestrictions).getEmbeddedParameters();
-    boolean checkIsotopeParams = parameters.getParameter(PostColumnReactionParameters.isotopeFilter)
-        .getValue();
-    IsotopePatternScoreParameters isotopeParams = parameters.getParameter(
-        PostColumnReactionParameters.isotopeFilter).getEmbeddedParameters();
-    boolean checkMSMSParams = parameters.getParameter(PostColumnReactionParameters.msmsFilter)
-        .getValue();
-    MSMSScoreParameters msmsParams = parameters.getParameter(
-        PostColumnReactionParameters.msmsFilter).getEmbeddedParameters();
-    this.unreactedRaws = List.of(unreactedSelection.getMatchingRawDataFiles().clone());
+    //Define feature list for processing
     this.flist = parameters.getParameter(PostColumnReactionParameters.flist).getValue()
         .getMatchingFeatureLists()[0];
-    FormulaPredictionFeatureListParameters predParams = new FormulaPredictionFeatureListParameters();
-    this.predParamSet = predParams.cloneParameterSet();
-    this.predParamSet.getParameter(ionization).setValue(ionType);
-    this.predParamSet.getParameter(mzTolerance).setValue(predMzTolerance);
 
-    //heurParams
-    if (checkHeurParams) {
-      this.predParamSet.getParameter(elementalRatios).setValue(true);
+    //Define unreacted raw datafiles
+    RawDataFilesSelection unreactedSelection = parameters.getParameter(
+        PostColumnReactionParameters.unreactedRawDataFiles).getValue();
+    this.unreactedRaws = List.of(unreactedSelection.getMatchingRawDataFiles().clone());
+
+    //Check for shape correlation threshold
+    boolean checkCorrThreshold = parameters.getParameter(
+        PostColumnReactionParameters.correlationThreshold).getValue();
+    if (checkCorrThreshold) {
+      corrThreshold = parameters.getParameter(PostColumnReactionParameters.correlationThreshold)
+          .getEmbeddedParameter().getValue();
+    } else {
+      corrThreshold = 0;
+    }
+
+    //Check for formula prediction and set prediction parameters
+    this.checkFormulaPred = parameters.getParameter(
+        PostColumnReactionParameters.formulaPredictionParameters).getValue();
+
+    if (checkFormulaPred) {
+      PostColumnReactionFormulaPredictionParameters predParams = parameters.getParameter(
+          PostColumnReactionParameters.formulaPredictionParameters).getEmbeddedParameters();
+      ElementalHeuristicParameters heurParams = predParams.getParameter(predElementalRatios)
+          .getEmbeddedParameters();
+      RDBERestrictionParameters rdbeParams = predParams.getParameter(predRdbeRestrictions)
+          .getEmbeddedParameters();
+      IsotopePatternScoreParameters isotopeParams = predParams.getParameter(predIsotopeFilter)
+          .getEmbeddedParameters();
+      MSMSScoreParameters msmsParams = predParams.getParameter(predMsmsFilter)
+          .getEmbeddedParameters();
+
+      this.predParamSet = new FormulaPredictionFeatureListParameters();
+      this.predParamSet.getParameter(ionization).setValue(predParams.getValue(predIonization));
+      this.predParamSet.getParameter(mzTolerance).setValue(predParams.getValue(predMZTolerance));
+      this.predParamSet.getParameter(elementalRatios)
+          .setValue(predParams.getValue(predElementalRatios));
       this.predParamSet.getParameter(elementalRatios).setEmbeddedParameters(heurParams);
-    } else {
-      this.predParamSet.getParameter(elementalRatios).setValue(false);
-    }
-
-    //rdbeParams
-    if (checkRDBEParams) {
-      this.predParamSet.getParameter(rdbeRestrictions).setValue(true);
+      this.predParamSet.getParameter(rdbeRestrictions)
+          .setValue(predParams.getValue(predRdbeRestrictions));
       this.predParamSet.getParameter(rdbeRestrictions).setEmbeddedParameters(rdbeParams);
-    } else {
-      this.predParamSet.getParameter(rdbeRestrictions).setValue(false);
-    }
-
-    //isotopeParams
-    if (checkIsotopeParams) {
-      this.predParamSet.getParameter(isotopeFilter).setValue(true);
+      this.predParamSet.getParameter(isotopeFilter)
+          .setValue(predParams.getValue(predIsotopeFilter));
       this.predParamSet.getParameter(isotopeFilter).setEmbeddedParameters(isotopeParams);
-    } else {
-      this.predParamSet.getParameter(isotopeFilter).setValue(false);
-    }
-
-    //msmsParams
-    if (checkMSMSParams) {
-      this.predParamSet.getParameter(msmsFilter).setValue(true);
+      this.predParamSet.getParameter(msmsFilter).setValue(predParams.getValue(predMsmsFilter));
       this.predParamSet.getParameter(msmsFilter).setEmbeddedParameters(msmsParams);
-    } else {
-      this.predParamSet.getParameter(msmsFilter).setValue(false);
     }
 
     setStatus(TaskStatus.WAITING);
@@ -176,6 +166,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   protected void process() {
     setStatus(TaskStatus.PROCESSING);
 
+    //Check if all unreacted reference files are contained in the feature list
     if (!checkUnreactedSelection(flist, unreactedRaws)) {
       setErrorMessage("Feature list " + flist.getName()
           + " does no contain all selected unreacted raw data files.");
@@ -183,7 +174,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
       return;
     }
 
-    // get the files that are considered as reacted
+    //Get the files that are considered as reacted
     final List<RawDataFile> reactedRaws = new ArrayList<>();
     for (RawDataFile file : flist.getRawDataFiles()) {
       if (!unreactedRaws.contains(file)) {
@@ -212,6 +203,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
       return;
     }
 
+    //Get correlation map for feature list
     R2RMap<RowsRelationship> correlationMap = flist.getMs1CorrelationMap().orElse(null);
     if (correlationMap == null || correlationMap.isEmpty()) {
       MZmineCore.getDesktop()
@@ -230,8 +222,8 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
           boolean isInUnreacted;
           isInUnreacted = unreactedRaws.stream().anyMatch(correlatedRow::hasFeature);
 
+          // Annotate unannotated features
           if (!isInUnreacted) {
-            // Annotate unannotated features
             annotateUnannotatedFeature(correlatedRow, annotatedRow);
           }
         }
@@ -244,6 +236,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
   private void annotateUnannotatedFeature(FeatureListRow correlatedRow, FeatureListRow baseRow) {
     if (correlatedRow.getPreferredAnnotation() == null || correlatedRow.getCompoundAnnotations()
         .isEmpty()) {
+      // Alternative way of selecting the base annotation in case multiple annotations are present for the precursor
 //      Optional<FeatureAnnotation> annotationWithFormula = CompoundAnnotationUtils.streamFeatureAnnotations(baseRow)
 //          .filter(a -> StringUtils.hasValue(a.getFormula())).findFirst();
 //
@@ -251,6 +244,7 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
 //        FeatureAnnotation annotation = annotationWithFormula.get();
 //      }
 
+      // Create name for transformation product based on name of the parent compound, the exact mass and possibly a terminal letter if multiple transformation products with the same parent and nominal m/z exist
       String baseAnnotation = baseRow.getPreferredAnnotationName();
       if (baseAnnotation != null) {
         String roundedMz = String.valueOf(Math.round(correlatedRow.getAverageMZ()));
@@ -270,15 +264,19 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
         // Increment the count for this base annotation
         annotationCounts.put(baseTpAnnotation, count + 1);
 
+        // Annotate the transformation product based on this name
         SimpleCompoundDBAnnotation annotation = new SimpleCompoundDBAnnotation();
         annotation.put(PrecursorMZType.class, correlatedRow.getAverageMZ());
         annotation.put(CompoundNameType.class, tpAnnotation);
         correlatedRow.addCompoundAnnotation(annotation);
 
-        predictCorrelatedFormula(correlatedRow, baseRow);
-        if (correlatedRow.getFormulas() != null && !correlatedRow.getFormulas().isEmpty()) {
-          ResultFormula correlatedFormula = correlatedRow.getFormulas().getFirst();
-          annotation.setFormula(correlatedFormula.toString());
+        // If automated prediction of molecular formulae for transformation products is selected, the formula is predicted and added to the annotation
+        if (this.checkFormulaPred) {
+          predictCorrelatedFormula(correlatedRow, baseRow);
+          if (correlatedRow.getFormulas() != null && !correlatedRow.getFormulas().isEmpty()) {
+            ResultFormula correlatedFormula = correlatedRow.getFormulas().getFirst();
+            annotation.setFormula(correlatedFormula.toString());
+          }
         }
       }
     }
@@ -352,5 +350,4 @@ public class PostColumnReactionTask extends AbstractFeatureListTask {
         () -> "Feature list " + aligned.getName() + " contains all selected blank raw data files.");
     return true;
   }
-
 }
