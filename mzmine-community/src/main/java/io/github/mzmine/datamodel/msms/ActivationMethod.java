@@ -34,9 +34,10 @@ public enum ActivationMethod {
   CID("CID", "collision induced dissociation", "eV"), //
   HCD("HCD", "higher-energy C-trap dissociation", "a.u."), //
   ECD("ECD", "electron capture dissociation", ""), //
-  ETD("ETD", "electron transfer dissociation", ""),
-  ETHCD("ETHCD", "Electron-transfer and higher-energy collision dissociation", ""),
-  UVPD("UVPD", "Ultraviolet photodissociation", ""),
+  ETD("ETD", "electron transfer dissociation", ""), //
+  ETHCD("ETHCD", "Electron-transfer and higher-energy collision dissociation", ""), //
+  EAD("EAD", "electron activated dissociation", "eV"), //
+  UVPD("UVPD", "Ultraviolet photodissociation", ""), //
   UNKNOWN("N.A.", "Unknown", "");
 
   private final String abbreviation;
@@ -59,6 +60,12 @@ public enum ActivationMethod {
 
   public String getUnit() {
     return unit;
+  }
+
+
+  @Override
+  public String toString() {
+    return getAbbreviation();
   }
 
   @NotNull

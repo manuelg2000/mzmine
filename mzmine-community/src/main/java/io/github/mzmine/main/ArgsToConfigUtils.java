@@ -55,7 +55,6 @@ class ArgsToConfigUtils {
    * @param argsParser The args parser
    */
   static void applyArgsToConfig(final MZmineCoreArgumentParser argsParser) {
-    ConfigService.setTsfProfile(argsParser.isLoadTsfProfile());
     ConfigService.setTdfPseudoProfile(argsParser.isLoadTdfPseudoProfile());
 
     checkAndLoadArgsConfiguration(argsParser);
