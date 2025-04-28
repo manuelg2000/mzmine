@@ -48,6 +48,7 @@ import io.github.mzmine.datamodel.features.types.annotations.compounddb.Molecula
 import io.github.mzmine.datamodel.features.types.annotations.compounddb.NPClassifierClassType;
 import io.github.mzmine.datamodel.features.types.annotations.compounddb.NPClassifierPathwayType;
 import io.github.mzmine.datamodel.features.types.annotations.compounddb.NPClassifierSuperclassType;
+import io.github.mzmine.datamodel.features.types.annotations.compounddb.PubChemIdType;
 import io.github.mzmine.datamodel.features.types.annotations.formula.FormulaType;
 import io.github.mzmine.datamodel.features.types.annotations.iin.IonTypeType;
 import io.github.mzmine.datamodel.features.types.numbers.CCSType;
@@ -504,6 +505,7 @@ public class LocalCSVDatabaseSearchTask extends AbstractTask {
     doIfNotNull(neutralMass, () -> a.put(neutralMassType, neutralMass));
     a.putIfNotNull(ionTypeType, IonTypeParser.parse(lineAdduct));
     a.putIfNotNull(molecularClassType, molecularClass);
+    a.putIfNotNull(pubchemIdType, pubchemId);
     a.putIfNotNull(classyFireSuperclassType, classyFireSuperclass);
     a.putIfNotNull(classyFireClassType, classyFireClass);
     a.putIfNotNull(classyFireSubclassType, classyFireSubclass);

@@ -27,6 +27,6 @@ package io.github.mzmine.datamodel.features.types.modifiers;
 
 public enum BindingsType {
 
-  AVERAGE, SUM, MIN, MAX, COUNT, RANGE, CONSENSUS, LIST;
+  AVERAGE, SUM, MIN, MAX, DIFFERENCE, COUNT, RANGE, CONSENSUS, LIST;
 
 }

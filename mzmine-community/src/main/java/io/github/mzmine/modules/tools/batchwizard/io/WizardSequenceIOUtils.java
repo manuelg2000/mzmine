@@ -166,7 +166,7 @@ public class WizardSequenceIOUtils {
           });
         } catch (Exception e) {
           logger.warning("Cannot set preset " + uniquePresetId + " to part " + part
-                         + ". Maybe it was renamed. " + e.getMessage());
+              + ". Maybe it was renamed. " + e.getMessage());
         }
       }
 
@@ -213,8 +213,8 @@ public class WizardSequenceIOUtils {
       return List.of();
     }
 
-    return FileAndPathUtil.findFilesInDir(path, FILE_FILTER, false).stream()
-        .filter(Objects::nonNull).flatMap(Arrays::stream).filter(Objects::nonNull).map(file -> {
+    return Arrays.stream(FileAndPathUtil.findFilesInDirFlat(path, FILE_FILTER, false, false))
+        .map(file -> {
           try {
             WizardSequence presets = WizardSequenceIOUtils.loadFromFile(file);
             return new LocalWizardSequenceFile(file, presets);

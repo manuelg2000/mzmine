@@ -54,7 +54,6 @@ import io.github.mzmine.main.TmpFileCleanup;
 import io.github.mzmine.modules.MZmineRunnableModule;
 import io.github.mzmine.modules.io.import_rawdata_all.AllSpectralDataImportModule;
 import io.github.mzmine.modules.io.import_rawdata_all.AllSpectralDataImportParameters;
-import io.github.mzmine.modules.io.import_spectral_library.SpectralLibraryImportParameters;
 import io.github.mzmine.modules.io.projectload.ProjectLoadModule;
 import io.github.mzmine.modules.tools.batchwizard.io.WizardSequenceIOUtils;
 import io.github.mzmine.parameters.ParameterSet;
@@ -305,7 +304,6 @@ public class MZmineGUI extends Application implements MZmineDesktop, JavaFxDeskt
    *
    * @param event - DragEvent
    */
-
   public static void activateSetOnDragDropped(DragEvent event) {
     List<String> messages = new ArrayList<>();
 
@@ -374,23 +372,18 @@ public class MZmineGUI extends Application implements MZmineDesktop, JavaFxDeskt
       if (!rawDataFiles.isEmpty() || !libraryFiles.isEmpty()) {
         if (!rawDataFiles.isEmpty()) {
           logger.finest(() -> "Importing " + rawDataFiles.size() + " raw files via drag and drop: "
-                              + rawDataFiles.stream().map(File::getAbsolutePath)
-                                  .collect(Collectors.joining(", ")));
+              + rawDataFiles.stream().map(File::getAbsolutePath).collect(Collectors.joining(", ")));
         }
         if (!libraryFiles.isEmpty()) {
           logger.finest(() -> "Importing " + libraryFiles.size() + " raw files via drag and drop: "
-                              + libraryFiles.stream().map(File::getAbsolutePath)
-                                  .collect(Collectors.joining(", ")));
+              + libraryFiles.stream().map(File::getAbsolutePath).collect(Collectors.joining(", ")));
         }
 
         // set raw and library files to parameter
         ParameterSet param = MZmineCore.getConfiguration()
             .getModuleParameters(AllSpectralDataImportModule.class).cloneParameterSet();
-        param.setParameter(AllSpectralDataImportParameters.advancedImport, false);
-        param.setParameter(AllSpectralDataImportParameters.fileNames,
-            rawDataFiles.toArray(File[]::new));
-        param.setParameter(SpectralLibraryImportParameters.dataBaseFiles,
-            libraryFiles.toArray(File[]::new));
+        param = AllSpectralDataImportParameters.create(ConfigService.isApplyVendorCentroiding(),
+            rawDataFiles.toArray(File[]::new), null, libraryFiles.toArray(File[]::new), null);
 
         // start import task for libraries and raw data files
         AllSpectralDataImportModule module = MZmineCore.getModuleInstance(
@@ -432,7 +425,7 @@ public class MZmineGUI extends Application implements MZmineDesktop, JavaFxDeskt
     }
 
     if (loc == TAB && MZmineCore.getDesktop().getAllTabs().stream()
-        .anyMatch(t -> t.getText().equals("Tasks")) || (loc != TAB && Objects.equals(loc,
+        .anyMatch(t -> MZmineTab.getText(t).equals("Tasks")) || (loc != TAB && Objects.equals(loc,
         currentTaskManagerLocation))) {
       // only return if we have that tab
       return;
@@ -577,6 +570,9 @@ public class MZmineGUI extends Application implements MZmineDesktop, JavaFxDeskt
     // key typed does not work
     // using EventFilter instead of handler as this is a top level to get all events
     rootScene.addEventFilter(KeyEvent.KEY_RELEASED, GlobalKeyHandler.getInstance());
+
+    // check user in gui mode and show message now
+    MZmineCore.checkUserRemainingDays(CurrentUserService.getUser());
 
     // register shutdown hook only if we have GUI - we don't want to
     // save configuration on exit if we only run a batch

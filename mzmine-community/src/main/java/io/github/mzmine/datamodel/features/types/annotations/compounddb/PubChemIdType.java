@@ -23,7 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.mzmine.modules.dataprocessing.id_localcsvsearch;
+package io.github.mzmine.datamodel.features.types.annotations.compounddb;
 
 import io.github.mzmine.datamodel.features.types.abstr.StringType;
 import java.util.logging.Logger;
