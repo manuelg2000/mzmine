@@ -41,7 +41,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class MenuExportToExcel extends MenuItem implements MenuExport {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(MenuExportToExcel.class.getName());
 
   private FileChooser fc;
 

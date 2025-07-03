@@ -124,8 +124,18 @@ public abstract class DataType<T> implements Comparable<DataType>, UniqueIdSuppl
                 List list = (List) model.get(type);
                 if (list != null) {
                   list = new ArrayList<>(list);
-                  list.remove(data);
-                  list.add(0, data);
+                  boolean removed = list.remove(data);
+                  // sometimes the edit combo cell seems to return wrapped values (in a list) instead of the actual ones.
+                  // check if that is the case and unwrap here.
+                  // also checked in EditComboCellFactory, but unfortunately the commitEdit method is already called with
+                  // the wrapped value. so seems to be nested deeply.
+                  if(!removed && data instanceof List falselyWrappedData) {
+                    removed = list.removeAll(falselyWrappedData);
+                    assert removed;
+                    list.addAll(0, falselyWrappedData);
+                  } else {
+                    list.add(0, data);
+                  }
                   model.set((DataType) type, list);
                 }
               } catch (Exception ex) {
@@ -307,18 +317,18 @@ public abstract class DataType<T> implements Comparable<DataType>, UniqueIdSuppl
     } else {
       throw new UnsupportedOperationException(
           "Programming error: No edit CellFactory for " + "data type: " + this.getHeaderString()
-          + " class " + this.getClass().toString());
+              + " class " + this.getClass().toString());
     }
   }
 
   // TODO dirty hack to make this a "singleton"
   @Override
-  public boolean equals(Object obj) {
+  public final boolean equals(Object obj) {
     return obj instanceof DataType dt && dt.getUniqueID().equals(this.getUniqueID());
   }
 
   @Override
-  public int hashCode() {
+  public final int hashCode() {
     return getUniqueID().hashCode();
   }
 
@@ -328,7 +338,8 @@ public abstract class DataType<T> implements Comparable<DataType>, UniqueIdSuppl
   }
 
   /**
-   * Creating a property which is used in a {@link ModularDataModel}
+   * Creating a property which is used for representing a value of a {@link ModularDataModel} in the
+   * gui.
    *
    * @return
    */
@@ -444,4 +455,5 @@ public abstract class DataType<T> implements Comparable<DataType>, UniqueIdSuppl
         return null;
     }
   }
+
 }

@@ -44,10 +44,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public class UniversalCalibrantsListCsvExtractor implements StandardsListExtractor {
 
+  private static final Logger logger = Logger.getLogger(
+      UniversalCalibrantsListCsvExtractor.class.getName());
+
   protected static final int mzRatioColumn = 0;
   protected static final int nameColumn = 1;
-
-  protected Logger logger = Logger.getLogger(this.getClass().getName());
 
   protected String filename;
   private final InputStream inputStream;

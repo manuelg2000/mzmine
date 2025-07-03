@@ -68,7 +68,8 @@ public class MultiChoiceComponent<T extends StringMapParser<T>> extends BorderPa
   // Filename extension.
   private static final FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter(
       "Comma-separated values files", "*.csv");
-  private final Logger logger = Logger.getLogger(getClass().getName());
+  private static final Logger logger = Logger.getLogger(MultiChoiceComponent.class.getName());
+
   private final CheckListView<T> adductsView = new CheckListView<>(
       FXCollections.observableArrayList());
 

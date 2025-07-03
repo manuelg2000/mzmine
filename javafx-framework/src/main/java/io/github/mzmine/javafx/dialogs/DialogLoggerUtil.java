@@ -54,6 +54,10 @@ public class DialogLoggerUtil {
     showDialog(AlertType.ERROR, title, message, true);
   }
 
+  public static void showWarningDialog(String title, String message) {
+    showDialog(AlertType.WARNING, title, message, true);
+  }
+
   /**
    * Logs the message and shows a dialog when in GUI mode
    */

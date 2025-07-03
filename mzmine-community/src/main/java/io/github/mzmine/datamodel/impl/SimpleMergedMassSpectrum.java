@@ -185,9 +185,8 @@ public class SimpleMergedMassSpectrum extends AbstractStorableSpectrum implement
     return retentionTime;
   }
 
-  @NotNull
   @Override
-  public Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     return scanningMzRange;
   }
 

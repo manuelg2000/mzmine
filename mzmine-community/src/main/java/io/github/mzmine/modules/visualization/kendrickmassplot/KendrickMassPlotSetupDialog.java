@@ -38,7 +38,9 @@ import javafx.scene.layout.Region;
 
 public class KendrickMassPlotSetupDialog extends ParameterSetupDialog {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      KendrickMassPlotSetupDialog.class.getName());
+
   private final ListView<RepeatingUnit> listView;
 
   public KendrickMassPlotSetupDialog(boolean valueCheckRequired, ParameterSet parameters,

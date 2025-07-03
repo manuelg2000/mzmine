@@ -61,7 +61,8 @@ public class MirrorScanWindow extends JFrame {
   public static final DataPointsTag[] tags = new DataPointsTag[]{DataPointsTag.ORIGINAL,
       DataPointsTag.FILTERED, DataPointsTag.ALIGNED};
   // for SpectralDBIdentity
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(MirrorScanWindow.class.getName());
+
   private final JPanel contentPane;
   private EChartPanel mirrorSpecrumPlot;
 

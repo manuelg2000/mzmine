@@ -198,7 +198,7 @@ public class IMSRawDataOverviewPane extends BorderPane {
     massDetectionPane.add(massDetectionFrameLabel, 0, 2);
     final Label binWidthDesc = new Label("Default mobility bin width:");
     Tooltip.install(binWidthDesc, new Tooltip(
-        "The automatically determined bin width for this dataset. Optimising this manually and setting it in the\n"
+        "The automatically determined bin width for this dataset. Optimizing this manually and setting it in the\n"
             + "IMS expander step may improve processing results."));
     massDetectionPane.add(binWidthDesc, 0, 3);
     massDetectionPane.add(this.binWidthLabel, 1, 3);

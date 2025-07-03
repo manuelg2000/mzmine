@@ -25,8 +25,13 @@
 
 package io.github.mzmine.gui.chartbasics.simplechart.providers;
 
+import java.awt.Paint;
+
 public interface ZCategoryProvider extends XYZValueProvider {
+
   int getNumberOfCategories();
 
   String getLegendLabel(int category);
+
+  Paint getLegendItemColor(int category);
 }

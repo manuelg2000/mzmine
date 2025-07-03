@@ -29,13 +29,13 @@ import java.nio.file.OpenOption;
 import java.nio.file.StandardOpenOption;
 
 public enum WriterOptions {
-  APPEND,
-  REPLACE;
+  APPEND, REPLACE;
 
   public OpenOption[] toOpenOption() {
     return switch (this) {
-      case APPEND -> new OpenOption[] {StandardOpenOption.CREATE, StandardOpenOption.APPEND};
-      case REPLACE -> new OpenOption[] {StandardOpenOption.CREATE, StandardOpenOption.WRITE};
+      case APPEND -> new OpenOption[]{StandardOpenOption.CREATE, StandardOpenOption.APPEND};
+      case REPLACE -> new OpenOption[]{StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+          StandardOpenOption.TRUNCATE_EXISTING};
     };
   }
 }

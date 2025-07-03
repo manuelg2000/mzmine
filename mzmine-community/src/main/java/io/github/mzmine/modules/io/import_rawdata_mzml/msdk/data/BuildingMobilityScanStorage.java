@@ -74,7 +74,7 @@ public class BuildingMobilityScanStorage {
   private final @NotNull MassSpectrumType spectrumType;
   private final @NotNull PolarityType polarity;
   private final String scanDefinition;
-  private final @NotNull Range<Double> scanningMZRange;
+  private final @Nullable Range<Double> scanningMZRange;
 
 
   /**
@@ -267,7 +267,7 @@ public class BuildingMobilityScanStorage {
     return scanDefinition;
   }
 
-  public Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     return scanningMZRange;
   }
 

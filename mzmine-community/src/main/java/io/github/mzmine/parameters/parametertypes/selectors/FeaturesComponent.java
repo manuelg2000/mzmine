@@ -54,14 +54,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class FeaturesComponent extends HBox {
 
+  private static final Logger logger = Logger.getLogger(FeaturesComponent.class.getName());
+
   private final Button addButton = new Button("Add");
   private final Button removeButton = new Button("Remove");
   public ObservableList<Feature> currentValue = FXCollections.observableArrayList();
-  ;
+
   private ListView<Feature> featuresList = new ListView<>(currentValue);
   private VBox buttonPane = new VBox();
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
 
   public FeaturesComponent() {
 

@@ -62,8 +62,7 @@ public class ChromatogramBlankSubtractionParameters extends SimpleParameterSet {
 
   public ChromatogramBlankSubtractionParameters() {
     super(new Parameter[]{featureLists, mzTol, suffix, handleOriginal},
-        // TODO add docs
-        "https://mzmine.github.io/mzmine_documentation/module_docs/filter_blanksubtraction/filter_blanksubtraction.html");
+        "https://mzmine.github.io/mzmine_documentation/module_docs/filter_blanksubtraction/filter_chrom_blanksubtraction.html");
   }
 
   @Override

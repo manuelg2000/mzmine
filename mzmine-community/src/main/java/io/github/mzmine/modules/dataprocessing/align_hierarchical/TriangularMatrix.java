@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 public abstract class TriangularMatrix {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(TriangularMatrix.class.getName());
 
   private int dimension;
 
@@ -55,10 +55,11 @@ public abstract class TriangularMatrix {
 
   public long getListIndex(int row, int column) { // Symmetrical
 
-    if (row > column)
+    if (row > column) {
       return sumFormula(row) + (long) column;
-    else
+    } else {
       return sumFormula(column) + (long) row;
+    }
   }
 
   public long sumFormula(long i) {

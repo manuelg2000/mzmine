@@ -45,7 +45,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NetCDFImportModule implements MZmineProcessingModule {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(NetCDFImportModule.class.getName());
 
   private static final String MODULE_NAME = "netCDF file import";
   private static final String MODULE_DESCRIPTION = "This module imports raw data into the project.";

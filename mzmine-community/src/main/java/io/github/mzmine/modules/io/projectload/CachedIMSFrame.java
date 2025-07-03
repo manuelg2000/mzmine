@@ -233,7 +233,7 @@ public class CachedIMSFrame implements Frame {
   }
 
   @Override
-  public @NotNull Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     throw new UnsupportedOperationException("Unsupported during project load.");
   }
 

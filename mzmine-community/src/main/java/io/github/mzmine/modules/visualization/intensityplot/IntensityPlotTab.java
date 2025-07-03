@@ -74,6 +74,8 @@ import org.jfree.chart.title.TextTitle;
  */
 public class IntensityPlotTab extends MZmineTab {
 
+  private static final Logger logger = Logger.getLogger(IntensityPlotTab.class.getName());
+
   private static final Image pointsIcon = FxIconUtil.loadImageFromResources("icons/pointsicon.png");
   private static final Image linesIcon = FxIconUtil.loadImageFromResources("icons/linesicon.png");
   private static final Image axesIcon = FxIconUtil.loadImageFromResources("icons/axesicon.png");
@@ -83,8 +85,6 @@ public class IntensityPlotTab extends MZmineTab {
 
   static final Font legendFont = new Font("SansSerif", Font.PLAIN, 10);
   static final Font titleFont = new Font("SansSerif", Font.PLAIN, 11);
-
-  private Logger logger = Logger.getLogger(this.getClass().getName());
 
   private IntensityPlotDataset dataset;
   private JFreeChart chart;

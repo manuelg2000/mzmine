@@ -52,6 +52,9 @@ public class FormulaTextField extends TextField {
 
       @Override
       public IMolecularFormula fromString(String string) {
+        if (string == null || string.isEmpty()) {
+          return null;
+        }
         final IMolecularFormula formula = FormulaUtils.createMajorIsotopeMolFormula(string);
         return formula;
       }

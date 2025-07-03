@@ -38,6 +38,7 @@ import io.github.mzmine.util.annotations.CompoundAnnotationUtils;
 import io.github.mzmine.util.collections.SortOrder;
 import io.github.mzmine.util.color.SimpleColorPalette;
 import java.awt.Color;
+import java.awt.Paint;
 import java.util.Map;
 import javafx.beans.property.Property;
 import org.apache.commons.math3.linear.RealMatrix;
@@ -147,6 +148,11 @@ public class PCALoadingsProvider extends SimpleXYProvider implements PlotXYZData
   @Override
   public String getLegendLabel(int category) {
     return legendNames[category];
+  }
+
+  @Override
+  public Paint getLegendItemColor(int category) {
+    return paintScale.getPaint(category);
   }
 
   @Override

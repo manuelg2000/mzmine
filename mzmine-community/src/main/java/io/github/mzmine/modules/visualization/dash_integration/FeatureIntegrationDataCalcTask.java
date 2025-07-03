@@ -142,7 +142,7 @@ class FeatureIntegrationDataCalcTask extends FxUpdateTask<IntegrationDashboardMo
     }
 
     if (file instanceof IMSRawDataFile ims && (FeatureUtils.isMrm(feature))) {
-      final int previousBinningWith = BinningMobilogramDataAccess.getPreviousBinningWith(flist,
+      final int previousBinningWith = BinningMobilogramDataAccess.getPreviousBinningWidth(flist,
           ims.getMobilityType());
       var chrom = IonTimeSeriesUtils.extractIonMobilogramTimeSeries(
           new MobilityScanDataAccess(ims, MobilityScanDataType.MASS_LIST,

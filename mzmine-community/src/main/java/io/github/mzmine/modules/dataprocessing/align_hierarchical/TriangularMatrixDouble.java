@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 public class TriangularMatrixDouble extends TriangularMatrix {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(TriangularMatrixDouble.class.getName());
 
   private final LargeArrayDouble list;
 

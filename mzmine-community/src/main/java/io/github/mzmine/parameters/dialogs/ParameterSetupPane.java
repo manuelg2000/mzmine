@@ -25,6 +25,7 @@
 
 package io.github.mzmine.parameters.dialogs;
 
+import io.github.mzmine.gui.DesktopService;
 import io.github.mzmine.gui.helpwindow.HelpWindow;
 import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.parameters.EmbeddedParameterComponentProvider;
@@ -62,6 +63,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class represents a basic pane for parameter setup when the {@link ParameterSetupDialog} is
@@ -81,6 +83,7 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
   // if needed.
   protected final ButtonBar pnlButtons;
   // Footer message
+  @Nullable
   protected final Region footerMessage;
   // the centerPane is empty and used as the main container for all parameter components
   protected final BorderPane mainPane;
@@ -110,7 +113,7 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
    * @param message: html-formatted text
    */
   public ParameterSetupPane(boolean valueCheckRequired, ParameterSet parameters,
-      boolean addOkButton, Region message) {
+      boolean addOkButton, @Nullable Region message) {
     this(valueCheckRequired, parameters, addOkButton, false, message, true, true);
   }
 
@@ -120,7 +123,7 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
    * @param message: html-formatted text
    */
   public ParameterSetupPane(boolean valueCheckRequired, ParameterSet parameters,
-      boolean addOkButton, boolean addCancelButton, Region message, boolean addParamComponents) {
+      boolean addOkButton, boolean addCancelButton, @Nullable Region message, boolean addParamComponents) {
     this(valueCheckRequired, parameters, addOkButton, addCancelButton, message, addParamComponents,
         true);
   }
@@ -129,7 +132,7 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
    * Method to display setup dialog with a html-formatted footer message at the bottom.
    */
   public ParameterSetupPane(boolean valueCheckRequired, ParameterSet parameters,
-      boolean addOkButton, boolean addCancelButton, Region message, boolean addParamComponents,
+      boolean addOkButton, boolean addCancelButton, @Nullable Region message, boolean addParamComponents,
       boolean addHelp) {
     this(valueCheckRequired, parameters, addOkButton, addCancelButton, message, addParamComponents,
         addHelp, true);
@@ -139,7 +142,7 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
    * Method to display setup dialog with a html-formatted footer message at the bottom.
    */
   public ParameterSetupPane(boolean valueCheckRequired, ParameterSet parameters,
-      boolean addOkButton, boolean addCancelButton, Region message, boolean addParamComponents,
+      boolean addOkButton, boolean addCancelButton, @Nullable Region message, boolean addParamComponents,
       boolean addHelp, boolean addScrollPane) {
     this.valueCheckRequired = valueCheckRequired;
     this.parameterSet = parameters;
@@ -150,7 +153,10 @@ public class ParameterSetupPane extends BorderPane implements EmbeddedParameterC
     mainPane = this;
 
     // Use main CSS
-    getStylesheets().addAll(MZmineCore.getDesktop().getMainWindow().getScene().getStylesheets());
+    if(DesktopService.isGUI()) {
+      // may be called in headless mode for graphics export
+      getStylesheets().addAll(MZmineCore.getDesktop().getMainWindow().getScene().getStylesheets());
+    }
 
     centerPane = new BorderPane();
 

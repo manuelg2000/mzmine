@@ -38,7 +38,7 @@ import javafx.util.converter.NumberStringConverter;
 
 public class DoubleRangeComponent extends HBox {
 
-  protected final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(DoubleRangeComponent.class.getName());
 
   protected final TextField minTxtField, maxTxtField;
   protected final Label minusLabel;

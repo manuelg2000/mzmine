@@ -61,6 +61,10 @@ public class FxLabels {
     }
   }
 
+  public static Label styled(String name, Styles styleClass) {
+    return styled(name, styleClass.getStyleClass());
+  }
+
   public static Label styled(String name, String styleClass) {
     final Label label = new Label(name);
     label.getStyleClass().add(styleClass);

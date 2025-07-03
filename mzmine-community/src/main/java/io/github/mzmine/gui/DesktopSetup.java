@@ -34,7 +34,7 @@ import javafx.scene.image.Image;
  */
 public class DesktopSetup implements Runnable {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(DesktopSetup.class.getName());
 
   private static final Image mzMineIcon = FxIconUtil.loadImageFromResources("mzmineIcon.png");
 

@@ -43,12 +43,17 @@ public class FxColorUtil {
     return new java.awt.Color(r, g, b, opacity);
   }
 
-  public static Color awtColorToFX(final java.awt.Color color) {
-    final double r = color.getRed() / 255d;
-    final double g = color.getGreen() / 255d;
-    final double b = color.getBlue() / 255d;
-    final double opacity = color.getAlpha() / 255d;
-    return Color.color(r, g, b, opacity);
+  public static Color awtColorToFX(final java.awt.Paint paint) {
+    if (paint instanceof java.awt.Color color) {
+      final double r = color.getRed() / 255d;
+      final double g = color.getGreen() / 255d;
+      final double b = color.getBlue() / 255d;
+      final double opacity = color.getAlpha() / 255d;
+      return Color.color(r, g, b, opacity);
+    } else if (paint instanceof java.awt.GradientPaint c) {
+      return awtColorToFX(c.getColor1());
+    }
+    throw new IllegalArgumentException("Unsupported paint type: " + paint.getClass().getName());
   }
 
 }

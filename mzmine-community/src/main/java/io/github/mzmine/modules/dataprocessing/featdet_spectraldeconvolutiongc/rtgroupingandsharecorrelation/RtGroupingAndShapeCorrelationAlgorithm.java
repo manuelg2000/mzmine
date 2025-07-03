@@ -36,6 +36,10 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Implementation runs out of memory and does not perform well
+ */
+@Deprecated
 public class RtGroupingAndShapeCorrelationAlgorithm implements SpectralDeconvolutionAlgorithm {
 
   private final RTTolerance rtTolerance;

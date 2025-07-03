@@ -49,7 +49,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MzXMLImportModule implements MZmineProcessingModule {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(MzXMLImportModule.class.getName());
 
   private static final String MODULE_NAME = "mzXML file import";
   private static final String MODULE_DESCRIPTION = "This module imports raw data into the project.";

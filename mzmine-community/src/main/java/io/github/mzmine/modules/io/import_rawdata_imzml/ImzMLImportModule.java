@@ -46,7 +46,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ImzMLImportModule implements MZmineProcessingModule {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(ImzMLImportModule.class.getName());
 
   private static final String MODULE_NAME = "iMZML file import";
   private static final String MODULE_DESCRIPTION = "This module imports raw data into the project.";

@@ -74,7 +74,7 @@ public class MassDetectionParameters extends SimpleParameterSet {
       This reduces the intensity differences between spectra acquired with different injection times
       and reverts to "raw" intensities.""", false);
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(MassDetectionParameters.class.getName());
 
   public MassDetectionParameters() {
     super(new Parameter[]{dataFiles, scanSelection, scanTypes, denormalizeMSnScans, massDetector},
@@ -95,7 +95,7 @@ public class MassDetectionParameters extends SimpleParameterSet {
         denorm && !(detector == MassDetectors.FACTOR_OF_LOWEST);
     if (illegalDenormalizeMassDetectorCombo) {
       errorMessages.add("Spectral denormalization is currently only supported by the "
-                        + "Factor of the lowest mass detector; selected: " + detector);
+          + "Factor of the lowest mass detector; selected: " + detector);
       return false;
     }
 

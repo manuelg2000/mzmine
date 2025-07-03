@@ -31,7 +31,7 @@ import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.datamodel.features.ModularFeature;
 import io.github.mzmine.datamodel.features.ModularFeatureList;
 import io.github.mzmine.datamodel.features.ModularFeatureListRow;
-import io.github.mzmine.datamodel.features.types.DataType;
+import io.github.mzmine.datamodel.features.types.abstr.EnumDataType;
 import io.github.mzmine.datamodel.features.types.modifiers.NoTextColumn;
 import io.github.mzmine.datamodel.features.types.modifiers.NullColumnType;
 import io.github.mzmine.modules.io.projectload.version_3_0.CONST;
@@ -44,7 +44,7 @@ import javax.xml.stream.XMLStreamWriter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PolarityTypeType extends DataType<PolarityType> implements NullColumnType,
+public class PolarityTypeType extends EnumDataType<PolarityType> implements NullColumnType,
     NoTextColumn {
 
   @Override
@@ -71,12 +71,12 @@ public class PolarityTypeType extends DataType<PolarityType> implements NullColu
   public void saveToXML(@NotNull XMLStreamWriter writer, @Nullable Object value,
       @NotNull ModularFeatureList flist, @NotNull ModularFeatureListRow row,
       @Nullable ModularFeature feature, @Nullable RawDataFile file) throws XMLStreamException {
-    if(value == null) {
+    if (value == null) {
       writer.writeCharacters(CONST.XML_NULL_VALUE);
       return;
     }
 
-    if(value instanceof PolarityType pol) {
+    if (value instanceof PolarityType pol) {
       writer.writeCharacters(pol.name());
     }
   }
@@ -86,7 +86,7 @@ public class PolarityTypeType extends DataType<PolarityType> implements NullColu
       @NotNull ModularFeatureList flist, @NotNull ModularFeatureListRow row,
       @Nullable ModularFeature feature, @Nullable RawDataFile file) throws XMLStreamException {
     final String text = ParsingUtils.readNullableString(reader.getElementText());
-    if(text == null) {
+    if (text == null) {
       return null;
     }
     return PolarityType.valueOf(text);

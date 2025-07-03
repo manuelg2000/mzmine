@@ -149,7 +149,7 @@ public class SimpleFeatureListAppliedMethod implements FeatureListAppliedMethod 
     try {
       moduleClass = (Class<? extends MZmineModule>) Class.forName(moduleClassName);
       moduleParameters = MZmineCore.getConfiguration().getModuleParameters(moduleClass)
-          .cloneParameterSet();
+          .cloneParameterSet(true);
       moduleParameters.loadValuesFromXML(parametersElement);
     } catch (Exception | NoClassDefFoundError e) {
       logger.info("Cannot parse module parameters for class %s".formatted(moduleClassName));

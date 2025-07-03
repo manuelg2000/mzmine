@@ -100,7 +100,9 @@ import org.jfree.data.xy.XYDataset;
 
 public class KovatsIndexExtractionDialog extends EmptyParameterSetupDialogBase {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      KovatsIndexExtractionDialog.class.getName());
+
 
   private static final ExtensionFilter csvFilter = new ExtensionFilter("Comma-separated values",
       "*.csv");

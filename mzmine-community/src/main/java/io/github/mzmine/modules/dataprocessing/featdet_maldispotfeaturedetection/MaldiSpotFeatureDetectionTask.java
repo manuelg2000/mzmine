@@ -228,7 +228,7 @@ public class MaldiSpotFeatureDetectionTask extends AbstractTask {
 
     final List<ExpandedTrace> expandedTraces = task.getExpandedTraces();
 
-    flist.getRows().clear();
+    flist.clearRows();
     for (ExpandedTrace expandedTrace : expandedTraces) {
       final ModularFeatureListRow row = new ModularFeatureListRow(flist, expandedTrace.oldRow(),
           false);
@@ -253,6 +253,7 @@ public class MaldiSpotFeatureDetectionTask extends AbstractTask {
 
     return expanderParameters;
   }
+
   /**
    * Set up a range map of the expanding traces for the respective modular feature list.
    */

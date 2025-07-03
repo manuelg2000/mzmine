@@ -46,6 +46,13 @@ public final class EmptyIndexRange implements IndexRange {
 
   @Override
   public int maxInclusive() {
+    // muss be lower than min because a loop from min <= i <= maxInclusive should never apply
+    return -2;
+  }
+
+  @Override
+  public int maxExclusive() {
+    // same like min so that no loop applies
     return -1;
   }
 

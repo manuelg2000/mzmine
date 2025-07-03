@@ -163,7 +163,7 @@ public class LibraryEntryWrappedScan implements Scan {
   }
 
   @Override
-  public @NotNull Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     return requireNonNullElse(getDataPointMZRange(), Range.singleton(0d));
   }
 

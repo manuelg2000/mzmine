@@ -46,9 +46,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class StandardCompoundNormalizerTask extends AbstractTask {
 
+  private static final Logger logger = Logger.getLogger(
+      StandardCompoundNormalizerTask.class.getName());
+
   private final OriginalFeatureListOption handleOriginal;
   private final MZmineProject project;
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
   private final ModularFeatureList originalFeatureList;
   private ModularFeatureList normalizedFeatureList;
 

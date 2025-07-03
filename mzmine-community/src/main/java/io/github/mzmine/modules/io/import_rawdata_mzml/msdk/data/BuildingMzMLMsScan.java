@@ -263,7 +263,7 @@ public class BuildingMzMLMsScan extends MetadataOnlyScan {
   }
 
   @Override
-  public @NotNull Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     if (mzScanWindowRange == null) {
       if (!getScanList().getScans().isEmpty()) {
         Optional<MzMLScanWindowList> scanWindowList = getScanList().getScans().get(0)

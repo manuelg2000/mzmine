@@ -68,7 +68,8 @@ import org.jfree.data.xy.XYDataset;
 
 public class HistogramPanel extends BorderPane {
 
-  private final Logger logger = Logger.getLogger(getClass().getName());
+  private static final Logger logger = Logger.getLogger(HistogramPanel.class.getName());
+
   private final BorderPane contentPanel;
   private final AtomicLong currentUpdateID = new AtomicLong(0);
   private final BorderPane southwest;

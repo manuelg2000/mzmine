@@ -48,8 +48,7 @@ import org.apache.commons.lang3.mutable.MutableDouble;
  */
 public class NetworkCliqueMS {
 
-  private Logger logger = Logger.getLogger(getClass().getName());
-
+  private static final Logger logger = Logger.getLogger(NetworkCliqueMS.class.getName());
 
   private final HashMap<Pair<Integer, Integer>, Double> edges = new HashMap<>();//Edges of the undirected graph network
   private final HashMap<Integer, Integer> nodes = new HashMap<>(); // Indicates if edge is inside or not a clique
@@ -449,8 +448,9 @@ public class NetworkCliqueMS {
       }
 
       //update progress
-      this.progress.setValue(driverTask.EIC_PROGRESS + driverTask.MATRIX_PROGRESS +
-          driverTask.NET_PROGRESS * ((double) (randpos + 1) / (double) randallNodes.size()));
+      this.progress.setValue(
+          driverTask.EIC_PROGRESS + driverTask.MATRIX_PROGRESS + driverTask.NET_PROGRESS * (
+              (double) (randpos + 1) / (double) randallNodes.size()));
     }
     Double firstlogl = loglResult.get(0);
     Double diff = 1.0 - Math.abs(currentLogL

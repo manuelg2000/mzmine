@@ -64,7 +64,7 @@ import org.jetbrains.annotations.Nullable;
 
 class RansacAlignerTask extends AbstractTask {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(RansacAlignerTask.class.getName());
 
   private final MZmineProject project;
   private ModularFeatureList[] featureLists;

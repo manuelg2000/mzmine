@@ -52,8 +52,9 @@ import org.jetbrains.annotations.Nullable;
 
 class LinearNormalizerTask extends AbstractTask {
 
+  private static final Logger logger = Logger.getLogger(LinearNormalizerTask.class.getName());
+
   private final OriginalFeatureListOption handleOriginal;
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   static final float maximumOverallFeatureHeightAfterNormalization = 100000.0f;
 

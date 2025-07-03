@@ -176,7 +176,21 @@ public sealed interface IndexRange permits EmptyIndexRange, SimpleIndexRange, Si
    * Create a sublist view that contains this IndexRange
    */
   default <T> List<T> sublist(List<T> data) {
-    return isEmpty() ? List.of() : data.subList(min(), maxExclusive());
+    return sublist(data, false);
+  }
+
+  /**
+   * Create a sublist view or copy that contains this IndexRange
+   *
+   * @param createCopy if true then create a copy instead of a view. use copy if original list may
+   *                   be garbage collected but view will disrupt this
+   */
+  default <T> List<T> sublist(List<T> data, final boolean createCopy) {
+    if (isEmpty()) {
+      return List.of();
+    }
+    List<T> view = data.subList(min(), maxExclusive());
+    return createCopy ? new ArrayList<>(view) : view;
   }
 
   /**

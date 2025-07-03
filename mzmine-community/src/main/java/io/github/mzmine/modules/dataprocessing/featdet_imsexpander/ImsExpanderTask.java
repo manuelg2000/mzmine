@@ -140,7 +140,7 @@ public class ImsExpanderTask extends AbstractTask {
 
     desc = "Mobility expanding feature list " + flist.getName();
 
-    final List<? extends FeatureListRow> rows = new ArrayList<>(flist.getRows());
+    final List<? extends FeatureListRow> rows = flist.getRowsCopy();
     rows.sort((Comparator.comparingDouble(FeatureListRow::getAverageMZ)));
 
     final List<ExpandingTrace> expandingTraces = new ArrayList<>(rows.stream().map(
@@ -223,7 +223,7 @@ public class ImsExpanderTask extends AbstractTask {
     }
 
     // explicitly don't renumber, IDs are kept from the old flist.
-    FeatureListUtils.sortByDefaultRT(newFlist, false);
+    FeatureListUtils.sortByDefault(newFlist, false);
 
     newFlist.getAppliedMethods().add(
         new SimpleFeatureListAppliedMethod(ImsExpanderModule.class, parameters,

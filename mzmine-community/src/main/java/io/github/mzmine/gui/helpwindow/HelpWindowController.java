@@ -38,7 +38,7 @@ import javafx.scene.web.WebView;
  */
 public class HelpWindowController {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(HelpWindowController.class.getName());
 
   @FXML
   private WebView helpWebView;

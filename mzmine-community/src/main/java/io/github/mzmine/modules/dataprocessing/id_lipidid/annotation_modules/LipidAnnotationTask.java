@@ -63,7 +63,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class LipidAnnotationTask extends AbstractTask {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(LipidAnnotationTask.class.getName());
+
   private double finishedSteps;
   private double totalSteps;
   private final FeatureList featureList;
@@ -128,7 +129,8 @@ public class LipidAnnotationTask extends AbstractTask {
     }
     this.selectedCustomLipidClasses = null;
     if (parameters.getValue(LipidAnnotationParameters.customLipidClasses)) {
-      this.selectedCustomLipidClasses = parameters.getEmbeddedParameterValue(LipidAnnotationParameters.customLipidClasses)
+      this.selectedCustomLipidClasses = parameters.getEmbeddedParameterValue(
+              LipidAnnotationParameters.customLipidClasses)
           .getParameter(CustomLipidClassParameters.customLipidClassChoices).getValue();
     }
 

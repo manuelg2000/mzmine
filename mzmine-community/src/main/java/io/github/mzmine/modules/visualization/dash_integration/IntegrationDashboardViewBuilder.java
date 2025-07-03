@@ -187,7 +187,7 @@ public class IntegrationDashboardViewBuilder extends FxViewBuilder<IntegrationDa
       plot.setMaxIntegratedFeatures(1);
       if (file instanceof IMSRawDataFile ims) {
         plot.setBinningMobilogramDataAccess(new BinningMobilogramDataAccess(ims,
-            BinningMobilogramDataAccess.getPreviousBinningWith(model.getFeatureList(),
+            BinningMobilogramDataAccess.getPreviousBinningWidth(model.getFeatureList(),
                 ims.getMobilityType())));
       }
 //        plot.setChartGroup(chartGroup);

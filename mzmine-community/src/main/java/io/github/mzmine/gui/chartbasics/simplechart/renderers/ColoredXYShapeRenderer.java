@@ -270,7 +270,7 @@ public class ColoredXYShapeRenderer extends XYShapeRenderer {
     final int numCategories = zcat.getNumberOfCategories();
     for (int i = 0; i < numCategories; i++) {
       final String labelText = zcat.getLegendLabel(i);
-      final Paint paint = zds.getPaintScale().getPaint(i);
+      final Paint paint = zcat.getLegendItemColor(i);
       final LegendItem item = new LegendItem(labelText, null, null, null, dataPointsShape,
           !drawOutlinesOnly ? paint : ColorUtils.TRANSPARENT_AWT, outlineStroke,
           drawOutlinesOnly ? paint : ColorUtils.TRANSPARENT_AWT);

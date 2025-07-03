@@ -143,7 +143,7 @@ public class FragmentUtils {
       final IndexRange indexRange = BinarySearch.indexRange(
           fragmentFormulaTol.getToleranceRange(signal.getMZ()), subFormulae,
           FormulaWithExactMz::mz);
-      peaksWithFormulae.add(new SignalWithFormulae(signal, indexRange.sublist(subFormulae)));
+      peaksWithFormulae.add(new SignalWithFormulae(signal, indexRange.sublist(subFormulae, true)));
     }
     return peaksWithFormulae;
   }

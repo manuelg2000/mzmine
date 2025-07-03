@@ -55,8 +55,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class CustomLipidClassChoiceComponent extends BorderPane {
 
-  // Logger.
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      CustomLipidClassChoiceComponent.class.getName());
 
   private final ListView<CustomLipidClass> listView = new ListView<>();
   private final FlowPane buttonsPane = new FlowPane(Orientation.HORIZONTAL);
@@ -93,8 +93,7 @@ public class CustomLipidClassChoiceComponent extends BorderPane {
           parameters.getValue(AddCustomLipidClassParameters.lipidMainClass),
           parameters.getValue(AddCustomLipidClassParameters.backBoneFormula),
           parameters.getValue(AddCustomLipidClassParameters.lipidChainTypes),
-          parameters.getValue(AddCustomLipidClassParameters.customLipidClassFragmentationRules)
-      );
+          parameters.getValue(AddCustomLipidClassParameters.customLipidClassFragmentationRules));
 
       // Add to list of choices (if not already present).
       if (!listView.getItems().contains(customLipidClass)) {
@@ -209,8 +208,7 @@ public class CustomLipidClassChoiceComponent extends BorderPane {
             parameters.getValue(AddCustomLipidClassParameters.lipidMainClass),
             parameters.getValue(AddCustomLipidClassParameters.backBoneFormula),
             parameters.getValue(AddCustomLipidClassParameters.lipidChainTypes),
-            parameters.getValue(
-                AddCustomLipidClassParameters.customLipidClassFragmentationRules));
+            parameters.getValue(AddCustomLipidClassParameters.customLipidClassFragmentationRules));
         int selectedIndex = listView.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
           listView.getItems()

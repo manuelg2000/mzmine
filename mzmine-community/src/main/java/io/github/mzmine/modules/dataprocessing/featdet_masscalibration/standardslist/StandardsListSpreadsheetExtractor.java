@@ -44,12 +44,13 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
  */
 public class StandardsListSpreadsheetExtractor implements StandardsListExtractor {
 
+  private static final Logger logger = Logger.getLogger(
+      StandardsListSpreadsheetExtractor.class.getName());
+
   protected static final int retentionTimeColumn = 0;
   protected static final int ionFormulaColumn = 1;
   protected static final int nameColumn = 2;
   protected static final int mzColumn = 3;
-
-  protected Logger logger = Logger.getLogger(this.getClass().getName());
 
   protected String filename;
   protected int sheetIndex;

@@ -57,7 +57,9 @@ import org.jetbrains.annotations.NotNull;
  *
  */
 public class GnpsGcExportAndSubmitModule implements MZmineProcessingModule {
-  private final Logger logger = Logger.getLogger(getClass().getName());
+
+  private static final Logger logger = Logger.getLogger(
+      GnpsGcExportAndSubmitModule.class.getName());
 
   private static final String MODULE_NAME = "Export to GNPS-GC-MS (with ADAP)";
   private static final String MODULE_DESCRIPTION =

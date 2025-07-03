@@ -118,7 +118,7 @@ public class FeatureRawMobilogramProvider implements PlotXYDataProvider {
       }
     }
 
-    final int binningWith = BinningMobilogramDataAccess.getPreviousBinningWith(
+    final int binningWith = BinningMobilogramDataAccess.getPreviousBinningWidth(
         (ModularFeatureList) f.getFeatureList(), f.getMobilityUnit());
     var binner = new BinningMobilogramDataAccess((IMSRawDataFile) f.getRawDataFile(), binningWith);
     binner.setMobilogram(mobilograms);

@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class OptionForValuesComponent extends HBox {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(OptionForValuesComponent.class.getName());
 
   private final ComboBox<ValueOption> comboOption;
   private final TextField txtValue;

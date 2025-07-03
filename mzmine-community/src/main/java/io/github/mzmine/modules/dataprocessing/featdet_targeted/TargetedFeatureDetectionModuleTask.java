@@ -77,12 +77,13 @@ class TargetedFeatureDetectionModuleTask extends AbstractTask {
   protected static final Range<Float> floatInfiniteRange = Range.closed(Float.NEGATIVE_INFINITY,
       Float.POSITIVE_INFINITY);
 
+  private static final Logger logger = Logger.getLogger(
+      TargetedFeatureDetectionModuleTask.class.getName());
+
   private final BinningMobilogramDataAccess mobilogramBinning;
   private final ScanSelection scanSelection;
   private final List<Scan> matchingScans;
   private final IonNetworkLibrary ionLibrary;
-
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   private final MZmineProject project;
   private final RawDataFile dataFile;

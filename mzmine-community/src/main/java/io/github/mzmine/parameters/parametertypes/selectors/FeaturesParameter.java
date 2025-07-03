@@ -47,9 +47,10 @@ import org.w3c.dom.NodeList;
  */
 public class FeaturesParameter implements UserParameter<List<Feature>, FeaturesComponent> {
 
+  private static final Logger logger = Logger.getLogger(FeaturesParameter.class.getName());
+
   private String name = "Features";
   private List<Feature> value;
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   @Override
   public String getName() {

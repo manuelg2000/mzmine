@@ -71,10 +71,12 @@ import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
  */
 public class DPPSumFormulaPredictionTask extends DataPointProcessingTask {
 
+  private static final Logger logger = Logger.getLogger(
+      DPPSumFormulaPredictionTask.class.getName());
+
   private final Double minIsotopeScore;
   private final Double isotopeNoiseLevel;
   private final MZTolerance isotopeMZTolerance;
-  private final Logger logger = Logger.getLogger(DPPSumFormulaPredictionTask.class.getName());
   private final MZTolerance mzTolerance;
   private final int foundFormulas = 0;
   private final IonizationType ionType;

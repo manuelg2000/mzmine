@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 class ScanFilteringTask extends AbstractTask {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(ScanFilteringTask.class.getName());
 
   private final MZmineProject project;
   private RawDataFile dataFile, newFile;

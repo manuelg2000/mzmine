@@ -49,7 +49,8 @@ import java.util.logging.Logger;
  *
  */
 public class LibrarySubmitModule implements MZmineModule {
-  private final Logger logger = Logger.getLogger(getClass().getName());
+
+  private static final Logger logger = Logger.getLogger(LibrarySubmitModule.class.getName());
 
   private static final String MODULE_NAME = "Export spectral library entries (submit to GNPS)";
 

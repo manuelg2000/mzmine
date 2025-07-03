@@ -41,7 +41,7 @@ import javafx.stage.Stage;
  */
 public class HelpWindow extends Stage {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(HelpWindow.class.getName());
 
   public HelpWindow(String helpFileURL) {
 

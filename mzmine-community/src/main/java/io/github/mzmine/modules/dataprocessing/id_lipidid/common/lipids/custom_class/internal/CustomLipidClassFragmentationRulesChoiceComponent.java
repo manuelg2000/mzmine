@@ -55,8 +55,8 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 class CustomLipidClassFragmentationRulesChoiceComponent extends BorderPane {
 
-  // Logger.
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      CustomLipidClassFragmentationRulesChoiceComponent.class.getName());
 
   private final ListView<LipidFragmentationRule> listView = new ListView<>();
   private final FlowPane buttonsPane = new FlowPane(Orientation.HORIZONTAL);

@@ -224,7 +224,7 @@ public class DuplicateFilterTask extends AbstractTask {
       ModularFeatureListRow[] duplicatesNullArray) {
     final var filteredRows = Arrays.stream(duplicatesNullArray).filter(Objects::nonNull)
         .toArray(ModularFeatureListRow[]::new);
-    flist.setRows(filteredRows);
+    flist.setRowsApplySort(filteredRows);
   }
 
   private int applyOldAverageFilter(MZTolerance mzTolerance, RTTolerance rtTolerance,

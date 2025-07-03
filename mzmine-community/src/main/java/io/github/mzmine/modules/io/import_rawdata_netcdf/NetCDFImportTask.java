@@ -61,7 +61,7 @@ import ucar.nc2.Variable;
  */
 public class NetCDFImportTask extends AbstractTask implements RawDataImportTask {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(NetCDFImportTask.class.getName());
 
   private NetcdfFile inputFile;
 

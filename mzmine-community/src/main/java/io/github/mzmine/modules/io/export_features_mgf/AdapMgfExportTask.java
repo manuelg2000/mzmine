@@ -80,7 +80,7 @@ public class AdapMgfExportTask extends AbstractTask {
       @NotNull Instant moduleCallDate) {
     super(null, moduleCallDate); // no new data stored -> null
     this.featureLists = featureLists;
-    totalRows = (int) Stream.of(featureLists).map(FeatureList::getRows).count();
+    totalRows = Stream.of(featureLists).mapToInt(FeatureList::getNumberOfRows).sum();
 
     this.fileName = parameters.getParameter(AdapMgfExportParameters.FILENAME).getValue();
 
@@ -179,8 +179,7 @@ public class AdapMgfExportTask extends AbstractTask {
     }
   }
 
-  private void exportRow(FileWriter writer, FeatureListRow row, Scan ip)
-      throws IOException {
+  private void exportRow(FileWriter writer, FeatureListRow row, Scan ip) throws IOException {
     // data points of this cluster
     DataPoint dataPoints[] = ScanUtils.extractDataPoints(ip);
     if (!fractionalMZ) {
@@ -199,8 +198,7 @@ public class AdapMgfExportTask extends AbstractTask {
     // needs to be MSLEVEL=2 for GC-GNPS (even for GC-EI-MS data)
     writer.write("MSLEVEL=2" + newLine);
     writer.write("CHARGE=1+" + newLine);
-    writer.write("Num peaks="+ dataPoints.length + newLine);
-
+    writer.write("Num peaks=" + dataPoints.length + newLine);
 
     for (DataPoint point : dataPoints) {
       String line = formatMZ(point.getMZ()) + " " + intensityForm.format(point.getIntensity());

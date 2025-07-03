@@ -103,8 +103,9 @@ public class SpectralDeconvolutionGCTask extends AbstractFeatureListTask {
   }
 
   private void createNewDeconvolutedFeatureList(List<FeatureListRow> deconvolutedFeatureListRows) {
-    deconvolutedFeatureList = FeatureListUtils.createCopy(featureList, suffix,
-        getMemoryMapStorage());
+    deconvolutedFeatureList = FeatureListUtils.createCopyWithoutRows(featureList, suffix,
+        getMemoryMapStorage(), deconvolutedFeatureListRows.size(),
+        deconvolutedFeatureListRows.size());
     deconvolutedFeatureListRows.sort(FeatureListRowSorter.DEFAULT_RT);
     int newID = 1;
     for (FeatureListRow featureListRow : deconvolutedFeatureListRows) {

@@ -56,7 +56,9 @@ import javafx.stage.Stage;
 
 public class ProjectMetadataPaneController {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      ProjectMetadataPaneController.class.getName());
+
   private final MZmineProject currentProject = ProjectService.getProjectManager()
       .getCurrentProject();
   private final MetadataTable metadataTable = currentProject.getProjectMetadata();

@@ -12,7 +12,6 @@
  *
  * The above copyright notice and this permission notice shall be
  * included in all copies or substantial portions of the Software.
- *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
  * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,51 +22,28 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package io.github.mzmine.datamodel.features.types;
+package io.github.mzmine.datamodel.features.types.numbers.scores;
 
-import io.github.mzmine.datamodel.RawDataFile;
-import io.github.mzmine.datamodel.features.ModularFeature;
-import io.github.mzmine.datamodel.features.types.modifiers.NoTextColumn;
-import java.util.Map;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
+import io.github.mzmine.datamodel.features.types.numbers.abstr.ScoreType;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This FeaturesType contains features for each RawDataFile. Sub columns for samples and charts are
- * created.
- * 
- * @author Robin Schmid (robinschmid@uni-muenster.de)
- *
+ * Coefficient of variation (=relative standard deviation) of the feature abundance, evaluated for
+ * an aligned feature list for a specific set of raw data files.
  */
-public class FeaturesType extends DataType<Map<RawDataFile, ModularFeature>>
-    implements NoTextColumn {
+public class CvType extends ScoreType {
 
-  @NotNull
-  @Override
-  public final String getUniqueID() {
-    // Never change the ID for compatibility during saving/loading of type
-    return "features_map";
-  }
-
-  @NotNull
-  @Override
-  public String getHeaderString() {
-    return "Features";
+  public CvType() {
+    super();
   }
 
   @Override
-  public Property<Map<RawDataFile, ModularFeature>> createProperty() {
-    return new SimpleObjectProperty<>();
+  public @NotNull String getUniqueID() {
+    return "cv_in_group";
   }
 
   @Override
-  public Class<Map<RawDataFile, ModularFeature>> getValueClass() {
-    return (Class) Map.class;
-  }
-
-  @Override
-  public boolean getDefaultVisibility() {
-    return true;
+  public @NotNull String getHeaderString() {
+    return "CV";
   }
 }

@@ -33,6 +33,7 @@ import org.w3c.dom.Element;
 
 public class EncryptionKeyParameter implements Parameter<StringCrypter> {
 
+  private static final Logger logger = Logger.getLogger(EncryptionKeyParameter.class.getName());
   private StringCrypter value;
 
   @Override
@@ -64,8 +65,8 @@ public class EncryptionKeyParameter implements Parameter<StringCrypter> {
       }
       value = new StringCrypter(nuVal);
     } catch (IOException e) {
-      Logger.getLogger(this.getClass().getName()).warning("Could not load Encryption key! "
-                                                          + "Encrypted parameters in the config file might not be decryptable.");
+      logger.warning("Could not load Encryption key! "
+          + "Encrypted parameters in the config file might not be decryptable.");
     }
   }
 

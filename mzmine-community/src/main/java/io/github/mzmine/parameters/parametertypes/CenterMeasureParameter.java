@@ -37,12 +37,11 @@ import org.w3c.dom.Element;
 
 /**
  * Parameter for center measure: median, avg, weighted avg
- * 
  */
-public class CenterMeasureParameter
-    implements UserParameter<CenterFunction, CenterMeasureComponent> {
+public class CenterMeasureParameter implements
+    UserParameter<CenterFunction, CenterMeasureComponent> {
 
-  private Logger logger = Logger.getLogger(getClass().getName());
+  private static final Logger logger = Logger.getLogger(CenterMeasureParameter.class.getName());
 
   private String name, description;
   private CenterFunction value;
@@ -81,7 +80,7 @@ public class CenterMeasureParameter
   }
 
   /**
-   * 
+   *
    */
   public CenterMeasureParameter(String name, String description, CenterMeasure choices[],
       Weighting[] weighting, CenterMeasure selectedMeasure, Weighting selectedWeighting) {
@@ -95,6 +94,7 @@ public class CenterMeasureParameter
   }
 
   /**
+   *
    */
   @Override
   public String getDescription() {
@@ -135,7 +135,8 @@ public class CenterMeasureParameter
   }
 
   @Override
-  public void setValueToComponent(CenterMeasureComponent component, @Nullable CenterFunction newValue) {
+  public void setValueToComponent(CenterMeasureComponent component,
+      @Nullable CenterFunction newValue) {
     component.setSelectedItem(newValue);
   }
 
@@ -152,8 +153,9 @@ public class CenterMeasureParameter
 
   @Override
   public void saveValueToXML(Element xmlElement) {
-    if (value == null)
+    if (value == null) {
       return;
+    }
     xmlElement.setTextContent("CenterFunction");
     xmlElement.setAttribute("measure", value.getMeasure().name());
     xmlElement.setAttribute("weighting", value.getWeightTransform().name());

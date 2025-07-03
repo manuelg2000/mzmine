@@ -36,7 +36,8 @@ import javafx.scene.layout.BorderPane;
 
 public class VanKrevelenDiagramAnchorPaneController {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(
+      VanKrevelenDiagramAnchorPaneController.class.getName());
 
   @FXML
   private BorderPane plotPane;

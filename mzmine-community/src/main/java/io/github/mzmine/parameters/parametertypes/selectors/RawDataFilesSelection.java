@@ -31,6 +31,7 @@ import io.github.mzmine.datamodel.RawDataFile;
 import io.github.mzmine.main.MZmineCore;
 import io.github.mzmine.project.ProjectService;
 import io.github.mzmine.util.TextUtils;
+import io.github.mzmine.util.io.JsonUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -224,17 +225,10 @@ public class RawDataFilesSelection implements Cloneable {
 
   public String toString() {
     if (evaluatedSelection != null) {
-      StringBuilder str = new StringBuilder();
-      RawDataFile[] files = getEvaluationResult();
-      for (int i = 0; i < files.length; i++) {
-        if (i > 0) {
-          str.append("\n");
-        }
-        str.append(files[i].getName());
-      }
-      return str.toString();
+      return selectionType + ", " + JsonUtils.writeStringOrElse(
+          Arrays.stream(evaluatedSelection).map(RawDataFilePlaceholder::getName).toList(), "[]");
     }
-    return "Evaluation not executed.";
+    return selectionType + ", Evaluation not executed.";
   }
 
   @Override

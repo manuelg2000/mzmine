@@ -43,7 +43,7 @@ import org.apache.commons.io.FileUtils;
 
 public class TmpFileCleanup implements Runnable {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(TmpFileCleanup.class.getName());
 
   private final File[] tempDirs;
 

@@ -31,6 +31,7 @@ import io.github.mzmine.modules.dataanalysis.utils.imputation.ImputationFunction
 import io.github.mzmine.modules.dataanalysis.utils.scaling.ScalingFunctions;
 import io.github.mzmine.modules.visualization.projectmetadata.SampleType;
 import io.github.mzmine.modules.visualization.projectmetadata.SampleTypeFilter;
+import io.github.mzmine.parameters.impl.IonMobilitySupport;
 import io.github.mzmine.parameters.impl.SimpleParameterSet;
 import io.github.mzmine.parameters.parametertypes.AbundanceMeasureParameter;
 import io.github.mzmine.parameters.parametertypes.CheckComboParameter;
@@ -41,6 +42,7 @@ import io.github.mzmine.parameters.parametertypes.selectors.FeatureListsParamete
 import io.github.mzmine.parameters.parametertypes.selectors.FeatureListsSelection;
 import java.awt.geom.Point2D;
 import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
 public class PCALoadingsExtractionParameters extends SimpleParameterSet {
 
@@ -60,7 +62,9 @@ public class PCALoadingsExtractionParameters extends SimpleParameterSet {
   public static final RegionsParameter regions = new RegionsParameter();
 
   public PCALoadingsExtractionParameters() {
-    super(flist, scaling, imputations, domainPc, rangePc, abundance, sampleTypes, regions);
+    super(
+        "https://mzmine.github.io/mzmine_documentation/visualization_modules/statistics_dashboard/statistics_dashboard.html#principal-component-analysis-pca",
+        flist, scaling, imputations, domainPc, rangePc, abundance, sampleTypes, regions);
   }
 
   public static PCALoadingsExtractionParameters fromPcaModel(PCAModel pcaModel,
@@ -89,5 +93,10 @@ public class PCALoadingsExtractionParameters extends SimpleParameterSet {
     pcaModel.setAbundance(getValue(abundance));
     pcaModel.setSampleTypeFilter(new SampleTypeFilter(getValue(sampleTypes)));
     return pcaModel;
+  }
+
+  @Override
+  public @NotNull IonMobilitySupport getIonMobilitySupport() {
+    return IonMobilitySupport.SUPPORTED;
   }
 }

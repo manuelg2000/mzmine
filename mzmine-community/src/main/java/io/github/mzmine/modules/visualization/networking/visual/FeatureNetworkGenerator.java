@@ -91,7 +91,7 @@ public class FeatureNetworkGenerator {
 
   public MultiGraph createNewGraph(String graphName, FeatureList flist, boolean useIonIdentity,
       boolean onlyBestIonIdentityNet, boolean ms1FeatureShapeEdges) {
-    return createNewGraph(graphName, flist.getRows(), useIonIdentity, onlyBestIonIdentityNet,
+    return createNewGraph(graphName, flist.getRowsCopy(), useIonIdentity, onlyBestIonIdentityNet,
         flist.getRowMaps(), ms1FeatureShapeEdges);
   }
 

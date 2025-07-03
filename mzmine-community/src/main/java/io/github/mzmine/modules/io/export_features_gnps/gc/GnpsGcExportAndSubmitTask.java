@@ -78,8 +78,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class GnpsGcExportAndSubmitTask extends AbstractTask {
 
-  // Logger.
-  private final Logger logger = Logger.getLogger(getClass().getName());
+  private static final Logger logger = Logger.getLogger(GnpsGcExportAndSubmitTask.class.getName());
 
   private final ParameterSet parameters;
   private final AtomicDouble progress = new AtomicDouble(0);

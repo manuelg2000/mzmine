@@ -210,4 +210,16 @@ public abstract sealed class MetadataColumn<T> implements Comparable<MetadataCol
     // then alphabetical order
     return this.getTitle().toLowerCase().compareTo(o.getTitle().toLowerCase());
   }
+
+  /**
+   * Date and number column have a natural order like the acquisition or concentration
+   *
+   * @return true if date or number
+   */
+  public boolean hasNaturalOrder() {
+    return switch (this) {
+      case DoubleMetadataColumn _, DateMetadataColumn _ -> true;
+      default -> false;
+    };
+  }
 }

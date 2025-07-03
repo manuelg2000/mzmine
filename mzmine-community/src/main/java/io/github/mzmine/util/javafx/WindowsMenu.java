@@ -44,7 +44,7 @@ import javafx.stage.Window;
  */
 public class WindowsMenu extends Menu {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(WindowsMenu.class.getName());
 
   private final MenuItem closeAllMenuItem;
   private final SimpleListProperty<MenuItem> itemsProperty;

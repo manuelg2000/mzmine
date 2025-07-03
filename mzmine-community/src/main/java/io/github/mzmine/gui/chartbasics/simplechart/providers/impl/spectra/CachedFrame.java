@@ -245,9 +245,8 @@ public class CachedFrame implements Frame {
     return originalFrame.getRetentionTime();
   }
 
-  @NotNull
   @Override
-  public Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     return originalFrame.getScanningMZRange();
   }
 

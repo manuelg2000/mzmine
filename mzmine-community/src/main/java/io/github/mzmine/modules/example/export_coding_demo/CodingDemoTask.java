@@ -86,8 +86,7 @@ class CodingDemoTask extends AbstractFeatureListTask {
     List<RowStats> results = new ArrayList<>();
 
     // process each row
-    var rows = featureList.getRows();
-    for (var row : rows) {
+    for (var row : featureList.getRows()) {
       if (!mzRange.contains(row.getAverageMZ()) && !rtRange.contains(
           row.getAverageRT().doubleValue())) {
         continue;

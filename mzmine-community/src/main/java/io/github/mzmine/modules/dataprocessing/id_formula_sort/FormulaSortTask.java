@@ -39,7 +39,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class FormulaSortTask extends AbstractTask {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(FormulaSortTask.class.getName());
+
   private final float weightIsotopeScore;
   private final float ppmMaxWeight;
   private final float weightMSMSscore;

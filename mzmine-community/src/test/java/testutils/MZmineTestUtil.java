@@ -63,7 +63,7 @@ import io.github.mzmine.project.impl.MZmineProjectImpl;
 import io.github.mzmine.taskcontrol.AbstractTask;
 import io.github.mzmine.taskcontrol.AllTasksFinishedListener;
 import io.github.mzmine.taskcontrol.Task;
-import io.github.mzmine.util.FeatureListRowSorter;
+import io.github.mzmine.util.FeatureListUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -169,7 +169,7 @@ public class MZmineTestUtil {
    * @return
    */
   public static boolean isSorted(FeatureList flist) {
-    return Comparators.isInOrder(flist.getRows(), FeatureListRowSorter.DEFAULT_RT);
+    return Comparators.isInOrder(flist.getRows(), FeatureListUtils.getDefaultRowSorter(flist));
   }
 
   public static void cleanProject() {

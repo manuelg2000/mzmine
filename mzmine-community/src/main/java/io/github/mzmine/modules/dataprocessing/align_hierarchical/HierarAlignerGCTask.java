@@ -68,7 +68,6 @@ package io.github.mzmine.modules.dataprocessing.align_hierarchical;
 //
 //public class HierarAlignerGCTask extends AbstractTask {
 //
-//  private Logger logger = Logger.getLogger(this.getClass().getName());
 //
 //  public static String TASK_NAME = "Hierarchical aligner (GC)";
 //

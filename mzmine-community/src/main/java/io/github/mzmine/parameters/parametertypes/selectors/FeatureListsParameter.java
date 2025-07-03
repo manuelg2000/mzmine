@@ -108,10 +108,14 @@ public class FeatureListsParameter implements
 
   @Override
   public FeatureListsParameter cloneParameter() {
+    return cloneParameter(true);
+  }
+
+  public FeatureListsParameter cloneParameter(boolean keepSelection) {
     FeatureListsParameter copy = new FeatureListsParameter(name, description, minCount, maxCount,
         onlyAligned);
     if (value != null) {
-      copy.value = value.clone();
+      copy.value = value.clone(keepSelection);
     }
     return copy;
   }

@@ -277,4 +277,20 @@ public class StringUtils {
       return defaultValue;
     }
   }
+
+  public static boolean anyBlank(String... values) {
+    return !hasValues(values);
+  }
+
+  /**
+   * All require non blank value
+   */
+  public static boolean hasValues(String... values) {
+    for (String value : values) {
+      if (isBlank(value)) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

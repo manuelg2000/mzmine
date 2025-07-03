@@ -61,7 +61,6 @@ import javafx.stage.Stage;
 
 public class ImsVisualizerTask extends AbstractTask {
 
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
 
   private XYDataset datasetIntensityMobility;
   private XYZDataset datasetMzMobility;

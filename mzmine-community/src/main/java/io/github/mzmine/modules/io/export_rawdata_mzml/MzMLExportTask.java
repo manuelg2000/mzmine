@@ -40,7 +40,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class MzMLExportTask extends AbstractTask {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(MzMLExportTask.class.getName());
+
   private final RawDataFile dataFile;
 
   // User parameters
@@ -69,8 +70,9 @@ public class MzMLExportTask extends AbstractTask {
    * @see io.github.mzmine.taskcontrol.Task#getFinishedPercentage()
    */
   public double getFinishedPercentage() {
-    if ((msdkMethod == null) || (msdkMethod.getFinishedPercentage() == null))
+    if ((msdkMethod == null) || (msdkMethod.getFinishedPercentage() == null)) {
       return 0;
+    }
     return msdkMethod.getFinishedPercentage().doubleValue();
   }
 
@@ -96,8 +98,9 @@ public class MzMLExportTask extends AbstractTask {
         msdkMethod = new NetCDFFileExportMethod(msdkDataFile, outFilename);
       }
 
-      if (isCanceled())
+      if (isCanceled()) {
         return;
+      }
       msdkMethod.execute();
 
       setStatus(TaskStatus.FINISHED);
@@ -115,7 +118,8 @@ public class MzMLExportTask extends AbstractTask {
   @Override
   public void cancel() {
     super.cancel();
-    if (msdkMethod != null)
+    if (msdkMethod != null) {
       msdkMethod.cancel();
+    }
   }
 }

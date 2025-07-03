@@ -94,7 +94,7 @@ public class ClearFeatureAnnotationsTask extends AbstractTask {
       setStatus(TaskStatus.PROCESSING);
       logger.info("Filtering feature list rows");
 
-      totalRows = origFeatureList.getRows().size() * typesToClear.size();
+      totalRows = origFeatureList.getNumberOfRows() * typesToClear.size();
 
       for (DataType<?> dataType : typesToClear) {
         if (!origFeatureList.getRowTypes().contains(dataType)) {

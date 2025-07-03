@@ -44,8 +44,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ExportChromatogramTask extends AbstractTask {
 
-  // Logger.
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(ExportChromatogramTask.class.getName());
 
   private final File exportFile;
   private final TICDataSet dataSet;

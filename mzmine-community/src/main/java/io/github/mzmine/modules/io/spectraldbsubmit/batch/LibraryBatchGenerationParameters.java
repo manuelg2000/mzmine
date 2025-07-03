@@ -74,7 +74,7 @@ import org.jetbrains.annotations.Nullable;
 public class LibraryBatchGenerationParameters extends SimpleParameterSet {
 
   public static final MsLevelFilterParameter postMergingMsLevelFilter = new MsLevelFilterParameter(
-      new Options[]{Options.MS2, Options.MSn}, new MsLevelFilter(Options.MSn));
+      new Options[]{Options.MS1, Options.MS2, Options.MSn}, new MsLevelFilter(Options.MSn));
 
   public static final FeatureListsParameter flists = new FeatureListsParameter();
 
@@ -112,7 +112,7 @@ public class LibraryBatchGenerationParameters extends SimpleParameterSet {
   private final OptionalParameter<MZToleranceParameter> mergeMzTolerance = new OptionalParameter<>(
       new MZToleranceParameter("m/z tolerance (merging)",
           "If selected, spectra from different collision energies will be merged.\n"
-          + "The tolerance used to group signals during merging of spectra", 0.008, 25));
+              + "The tolerance used to group signals during merging of spectra", 0.008, 25));
 
   public LibraryBatchGenerationParameters() {
     super(flists, file, exportFormat, postMergingMsLevelFilter, metadata, normalizer, merging,

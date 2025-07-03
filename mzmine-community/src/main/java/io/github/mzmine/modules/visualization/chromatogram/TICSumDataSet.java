@@ -50,8 +50,7 @@ public class TICSumDataSet extends AbstractTaskXYZDataset {
 
   private static final long serialVersionUID = 1L;
 
-  // Logger.
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(TICSumDataSet.class.getName());
 
   // rt bin for summing different files
   private final double RT_BIN = 0.001;

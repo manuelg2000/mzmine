@@ -102,11 +102,7 @@ public class RawDataFilesParameter implements
 
   @Override
   public RawDataFilesParameter cloneParameter() {
-    RawDataFilesParameter copy = new RawDataFilesParameter(name, minCount, maxCount);
-    if (value != null) {
-      copy.value = value.clone();
-    }
-    return copy;
+    return cloneParameter(true);
   }
 
   public RawDataFilesParameter cloneParameter(boolean keepSelection) {

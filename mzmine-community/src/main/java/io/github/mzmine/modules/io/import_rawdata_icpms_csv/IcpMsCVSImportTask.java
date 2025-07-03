@@ -53,7 +53,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class IcpMsCVSImportTask extends AbstractTask implements RawDataImportTask {
 
-  private Logger logger = Logger.getLogger(IcpMsCVSImportTask.class.getName());
+  private static final Logger logger = Logger.getLogger(IcpMsCVSImportTask.class.getName());
 
   protected String dataSource;
   private File file;

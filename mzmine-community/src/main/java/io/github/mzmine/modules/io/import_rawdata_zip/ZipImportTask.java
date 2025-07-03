@@ -52,7 +52,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ZipImportTask extends AbstractTask implements RawDataImportTask {
 
-  private Logger logger = Logger.getLogger(this.getClass().getName());
+  private static final Logger logger = Logger.getLogger(ZipImportTask.class.getName());
 
   private final File fileToOpen;
   private final @NotNull MZmineProject project;

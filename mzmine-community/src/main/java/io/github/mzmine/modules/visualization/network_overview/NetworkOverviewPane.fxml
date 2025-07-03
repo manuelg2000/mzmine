@@ -61,6 +61,7 @@
                       </Tab>
                       <Tab fx:id="tabSimilarity" closable="false" text="Similarity"/>
                       <Tab fx:id="tabAllMs2" closable="false" text="All MS2"/>
+                      <Tab fx:id="tabMasst" closable="false" text="External HTML"/>
                     </TabPane>
                 </SplitPane>
                   <TabPane side="LEFT" tabClosingPolicy="UNAVAILABLE">

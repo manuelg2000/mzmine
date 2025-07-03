@@ -194,7 +194,7 @@ public class SimsefImagingSchedulerTask extends AbstractTask {
       return;
     }
 
-    List<FeatureListRow> rows = new ArrayList<>(flist.getRows());
+    List<FeatureListRow> rows = flist.getRowsCopy();
     // sort low to high area. First find spots for low intensity features so we definitely fragment
     // those. should be easier to find spots for high area features
     rows.sort(Comparator.comparingDouble(FeatureListRow::getMaxArea));

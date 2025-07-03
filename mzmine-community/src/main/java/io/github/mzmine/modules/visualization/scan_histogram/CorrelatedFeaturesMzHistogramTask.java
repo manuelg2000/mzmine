@@ -55,6 +55,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class CorrelatedFeaturesMzHistogramTask extends AbstractTask {
 
+  private static final Logger logger = Logger.getLogger(
+      CorrelatedFeaturesMzHistogramTask.class.getName());
+  
   private final ModularFeatureList flist;
   private final Double minScore;
   private final Boolean limitToDoubleMz;
@@ -64,7 +67,6 @@ public class CorrelatedFeaturesMzHistogramTask extends AbstractTask {
   private final File outputFile;
   private final File outputFileNeutralMasses;
   private final Boolean saveToFile;
-  private final Logger logger = Logger.getLogger(this.getClass().getName());
   private MzDeltaCorrelationHistogramTab tab;
   private final ParameterSet parameters;
 

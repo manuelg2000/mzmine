@@ -109,7 +109,7 @@ public class SimpleBuildingScan extends MetadataOnlyScan {
   }
 
   @Override
-  public @NotNull Range<Double> getScanningMZRange() {
+  public @Nullable Range<Double> getScanningMZRange() {
     throw new UnsupportedOperationException("This method is not supported");
   }
 
